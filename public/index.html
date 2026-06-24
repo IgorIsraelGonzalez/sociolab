@@ -4,32 +4,37 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SocioLab — Maqueta interactiva</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <style>
   :root {
-    --negro: #1a1a1a;
-    --gris-oscuro: #3d3d3a;
-    --gris-medio: #6b6b67;
-    --gris-claro: #b4b2a9;
-    --gris-fondo: #f4f2ed;
-    --blanco: #ffffff;
-    --acento: #2c5f8a;
-    --acento-claro: #e8f0f8;
-    --acento-hover: #1e4a6e;
-    --verde: #3a7d5a;
-    --verde-claro: #e6f4ec;
-    --rojo: #8a2c2c;
-    --rojo-claro: #f4e8e8;
-    --amarillo-claro: #faf3e0;
-    --borde: #d3d1c7;
-    --sombra: 0 2px 12px rgba(0,0,0,0.08);
-    --radio: 10px;
-    --radio-lg: 16px;
+    --azul: #2196C4;
+    --azul-claro: #E8F5FB;
+    --azul-hover: #1878A0;
+    --naranja: #F47C20;
+    --naranja-claro: #FEF0E4;
+    --naranja-hover: #D4640E;
+    --negro: #2A2A28;
+    --gris-oscuro: #4A4A47;
+    --gris-medio: #7A7A76;
+    --gris-claro: #C4C4BE;
+    --gris-fondo: #EEF5F9;
+    --blanco: #F5FAFE;
+    --verde: #2E7D5A;
+    --verde-claro: #E6F4EC;
+    --rojo: #B02020;
+    --rojo-claro: #FAECEC;
+    --borde: #D8D8D2;
+    --borde-grueso: 5px;
+    --radio: 4px;
+    --radio-lg: 6px;
+    --sombra: 0 2px 16px rgba(33,150,196,0.08);
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
-    font-family: 'Georgia', serif;
+    font-family: 'Source Serif 4', Georgia, serif;
     background: var(--gris-fondo);
     color: var(--negro);
     min-height: 100vh;
@@ -37,8 +42,7 @@
 
   /* ── NAV ── */
   nav {
-    background: var(--blanco);
-    border-bottom: 1px solid var(--borde);
+    background: var(--negro);
     padding: 0 32px;
     display: flex;
     align-items: center;
@@ -47,57 +51,58 @@
     position: sticky;
     top: 0;
     z-index: 100;
+    border-bottom: 3px solid var(--azul);
   }
 
   .nav-logo {
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 20px;
-    font-weight: bold;
+    font-weight: 700;
     letter-spacing: -0.5px;
-    color: var(--negro);
+    color: var(--blanco);
   }
 
-  .nav-logo span {
-    color: var(--acento);
-  }
+  .nav-logo span { color: var(--azul); }
 
   .nav-links {
     display: flex;
-    gap: 4px;
+    gap: 2px;
   }
 
   .nav-link {
-    padding: 6px 14px;
-    border-radius: 6px;
+    padding: 6px 16px;
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 13px;
-    font-family: 'Arial', sans-serif;
+    font-weight: 500;
     cursor: pointer;
     border: none;
     background: none;
-    color: var(--gris-medio);
+    color: var(--gris-claro);
     transition: all 0.15s;
+    border-radius: 0;
+    letter-spacing: 0.3px;
   }
 
-  .nav-link:hover { background: var(--gris-fondo); color: var(--negro); }
-  .nav-link.active { background: var(--acento-claro); color: var(--acento); font-weight: bold; }
+  .nav-link:hover { color: var(--blanco); background: rgba(255,255,255,0.08); }
+  .nav-link.active { color: var(--azul); border-bottom: 2px solid var(--azul); }
 
   .nav-user {
     display: flex;
     align-items: center;
     gap: 10px;
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 13px;
-    font-family: 'Arial', sans-serif;
-    color: var(--gris-medio);
+    color: var(--gris-claro);
   }
 
   .avatar {
     width: 32px; height: 32px;
-    border-radius: 50%;
-    background: var(--acento);
+    background: var(--naranja);
     color: white;
     display: flex; align-items: center; justify-content: center;
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 13px;
-    font-family: 'Arial', sans-serif;
-    font-weight: bold;
+    font-weight: 700;
   }
 
   /* ── PANTALLAS ── */
@@ -106,26 +111,31 @@
 
   /* ── INICIO ── */
   .inicio-wrap {
-    max-width: 860px;
+    max-width: 900px;
     margin: 0 auto;
-    padding: 48px 24px;
+    padding: 48px 24px 80px;
   }
 
   .inicio-header {
     margin-bottom: 40px;
+    border-left: var(--borde-grueso) solid var(--azul);
+    padding-left: 20px;
   }
 
   .inicio-header h1 {
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 28px;
-    font-weight: normal;
+    font-weight: 700;
     color: var(--negro);
     margin-bottom: 6px;
+    letter-spacing: -0.5px;
   }
 
   .inicio-header p {
-    font-size: 15px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px;
     color: var(--gris-medio);
-    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
   }
 
   .modulos-grid {
@@ -137,8 +147,9 @@
 
   .modulo-card {
     background: var(--blanco);
-    border: 1px solid var(--borde);
+    border: 1.5px solid var(--borde);
     border-radius: var(--radio-lg);
+    border-top: var(--borde-grueso) solid var(--gris-claro);
     padding: 24px;
     cursor: pointer;
     transition: all 0.2s;
@@ -146,64 +157,65 @@
   }
 
   .modulo-card:hover { box-shadow: var(--sombra); transform: translateY(-2px); }
-  .modulo-card.disponible { border-left: 4px solid var(--acento); }
-  .modulo-card.bloqueado { opacity: 0.55; cursor: not-allowed; }
+  .modulo-card.disponible { border-top-color: var(--azul); }
+  .modulo-card.bloqueado { opacity: 0.5; cursor: not-allowed; }
 
   .modulo-num {
-    font-size: 11px;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
     color: var(--gris-claro);
     text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 8px;
-  }
-
-  .modulo-titulo {
-    font-size: 16px;
-    line-height: 1.4;
-    color: var(--negro);
+    letter-spacing: 2px;
     margin-bottom: 10px;
   }
 
+  .modulo-titulo {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--negro);
+    margin-bottom: 6px;
+  }
+
   .modulo-autores {
-    font-size: 12px;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
     color: var(--gris-medio);
-    margin-bottom: 16px;
+    margin-bottom: 20px;
   }
 
   .modulo-progreso-bar {
-    height: 4px;
+    height: 3px;
     background: var(--gris-fondo);
-    border-radius: 2px;
+    border-radius: 0;
     overflow: hidden;
     margin-bottom: 6px;
   }
 
   .modulo-progreso-fill {
     height: 100%;
-    background: var(--acento);
-    border-radius: 2px;
+    background: var(--azul);
     transition: width 0.4s;
   }
 
   .modulo-progreso-label {
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 11px;
-    font-family: 'Arial', sans-serif;
     color: var(--gris-medio);
   }
 
   .badge-nuevo {
     position: absolute;
-    top: 16px; right: 16px;
-    background: var(--acento);
+    top: -1px; right: 16px;
+    background: var(--naranja);
     color: white;
-    font-size: 10px;
-    font-family: 'Arial', sans-serif;
-    padding: 2px 8px;
-    border-radius: 20px;
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    padding: 3px 8px;
+    border-radius: 0 0 4px 4px;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
   }
 
   .badge-lock {
@@ -215,16 +227,16 @@
 
   /* ── LECCIÓN ── */
   .leccion-wrap {
-    max-width: 760px;
+    max-width: 780px;
     margin: 0 auto;
-    padding: 40px 24px;
+    padding: 40px 24px 80px;
   }
 
   .leccion-breadcrumb {
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 12px;
-    font-family: 'Arial', sans-serif;
     color: var(--gris-medio);
-    margin-bottom: 24px;
+    margin-bottom: 28px;
     display: flex;
     align-items: center;
     gap: 6px;
@@ -232,7 +244,7 @@
 
   .breadcrumb-link {
     cursor: pointer;
-    color: var(--acento);
+    color: var(--azul);
   }
 
   .breadcrumb-link:hover { text-decoration: underline; }
@@ -245,108 +257,103 @@
   }
 
   .momento-tab {
-    padding: 10px 20px;
+    padding: 10px 22px;
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 13px;
-    font-family: 'Arial', sans-serif;
+    font-weight: 500;
     color: var(--gris-medio);
     cursor: pointer;
-    border-bottom: 2px solid transparent;
+    border-bottom: 3px solid transparent;
     margin-bottom: -2px;
     transition: all 0.15s;
     white-space: nowrap;
+    letter-spacing: 0.2px;
   }
 
-  .momento-tab.active {
-    color: var(--acento);
-    border-bottom-color: var(--acento);
-    font-weight: bold;
-  }
+  .momento-tab.active { color: var(--azul); border-bottom-color: var(--azul); }
+  .momento-tab.completado { color: var(--verde); }
+  .momento-tab.completado::before { content: '✓ '; font-size: 11px; }
 
-  .momento-tab.completado {
-    color: var(--verde);
-  }
-
-  .momento-tab.completado::before {
-    content: '✓ ';
-    font-size: 11px;
-  }
-
-  /* Momento 1: Exposición teórica */
+  /* Exposición */
   .exposicion-bloque {
     background: var(--blanco);
-    border: 1px solid var(--borde);
+    border: 1.5px solid var(--borde);
     border-radius: var(--radio-lg);
-    padding: 32px;
+    border-top: var(--borde-grueso) solid var(--azul);
+    padding: 36px;
     margin-bottom: 20px;
   }
 
   .exposicion-bloque h2 {
-    font-size: 22px;
-    font-weight: normal;
-    margin-bottom: 6px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 4px;
     color: var(--negro);
+    letter-spacing: -0.3px;
   }
 
   .exposicion-bloque .subtitulo {
-    font-size: 13px;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
     color: var(--gris-medio);
-    margin-bottom: 24px;
-    padding-bottom: 20px;
+    margin-bottom: 28px;
+    padding-bottom: 24px;
     border-bottom: 1px solid var(--borde);
+    letter-spacing: 0.5px;
   }
 
   .exposicion-bloque p {
-    font-size: 15px;
-    line-height: 1.8;
+    font-size: 16px;
+    line-height: 1.85;
     color: var(--gris-oscuro);
-    margin-bottom: 16px;
+    margin-bottom: 18px;
   }
 
   .concepto-clave {
-    background: var(--acento-claro);
-    border-left: 3px solid var(--acento);
-    border-radius: 0 var(--radio) var(--radio) 0;
-    padding: 16px 20px;
-    margin: 24px 0;
-    font-size: 14px;
-    line-height: 1.7;
+    background: var(--azul-claro);
+    border-left: var(--borde-grueso) solid var(--azul);
+    padding: 18px 22px;
+    margin: 28px 0;
+    font-size: 15px;
+    line-height: 1.75;
     color: var(--gris-oscuro);
   }
 
   .concepto-clave strong {
     display: block;
-    font-family: 'Arial', sans-serif;
-    font-size: 11px;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--acento);
-    margin-bottom: 6px;
+    letter-spacing: 1.5px;
+    color: var(--azul);
+    margin-bottom: 8px;
   }
 
-  /* Momento 2: Identificación */
+  /* Identificación */
   .pregunta-bloque {
     background: var(--blanco);
-    border: 1px solid var(--borde);
+    border: 1.5px solid var(--borde);
     border-radius: var(--radio-lg);
-    padding: 32px;
+    border-top: var(--borde-grueso) solid var(--naranja);
+    padding: 36px;
     margin-bottom: 20px;
   }
 
   .pregunta-bloque h3 {
-    font-size: 13px;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--acento);
-    margin-bottom: 16px;
+    letter-spacing: 1.5px;
+    color: var(--naranja);
+    margin-bottom: 18px;
   }
 
   .pregunta-bloque p.enunciado {
     font-size: 16px;
-    line-height: 1.7;
+    line-height: 1.75;
     color: var(--negro);
-    margin-bottom: 24px;
+    margin-bottom: 28px;
   }
 
   .opciones-lista {
@@ -359,108 +366,113 @@
   .opcion {
     display: flex;
     align-items: flex-start;
-    gap: 12px;
+    gap: 14px;
     padding: 14px 18px;
     border: 1.5px solid var(--borde);
     border-radius: var(--radio);
     cursor: pointer;
     transition: all 0.15s;
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 14px;
-    font-family: 'Arial', sans-serif;
     color: var(--gris-oscuro);
-    line-height: 1.5;
+    line-height: 1.55;
     background: var(--blanco);
   }
 
-  .opcion:hover { border-color: var(--acento); background: var(--acento-claro); }
-  .opcion.seleccionada { border-color: var(--acento); background: var(--acento-claro); }
-  .opcion.correcta { border-color: var(--verde); background: var(--verde-claro); color: var(--negro); }
-  .opcion.incorrecta { border-color: var(--rojo); background: var(--rojo-claro); color: var(--negro); }
+  .opcion:hover { border-color: var(--azul); background: var(--azul-claro); }
+  .opcion.seleccionada { border-color: var(--azul); background: var(--azul-claro); }
+  .opcion.correcta { border-color: var(--verde); background: var(--verde-claro); }
+  .opcion.incorrecta { border-color: var(--rojo); background: var(--rojo-claro); }
 
   .opcion-letra {
-    min-width: 22px;
-    height: 22px;
-    border-radius: 50%;
+    min-width: 24px;
+    height: 24px;
     background: var(--gris-fondo);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 12px;
-    font-weight: bold;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
     color: var(--gris-medio);
     margin-top: 1px;
     flex-shrink: 0;
+    border-radius: 0;
   }
 
-  .opcion.seleccionada .opcion-letra { background: var(--acento); color: white; }
+  .opcion.seleccionada .opcion-letra { background: var(--azul); color: white; }
   .opcion.correcta .opcion-letra { background: var(--verde); color: white; }
   .opcion.incorrecta .opcion-letra { background: var(--rojo); color: white; }
 
   .retroalimentacion {
     padding: 16px 20px;
-    border-radius: var(--radio);
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 14px;
-    font-family: 'Arial', sans-serif;
-    line-height: 1.6;
+    line-height: 1.65;
     margin-bottom: 20px;
     display: none;
+    border-left: var(--borde-grueso) solid transparent;
   }
 
-  .retroalimentacion.correcta { background: var(--verde-claro); border-left: 3px solid var(--verde); color: var(--negro); }
-  .retroalimentacion.incorrecta { background: var(--rojo-claro); border-left: 3px solid var(--rojo); color: var(--negro); }
+  .retroalimentacion.correcta { background: var(--verde-claro); border-left-color: var(--verde); color: var(--negro); }
+  .retroalimentacion.incorrecta { background: var(--rojo-claro); border-left-color: var(--rojo); color: var(--negro); }
   .retroalimentacion.visible { display: block; }
 
   .retroalimentacion-titulo {
-    font-weight: bold;
-    margin-bottom: 4px;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
   }
 
-  /* Momento 3: Análisis de caso */
+  /* Caso */
   .caso-bloque {
     background: var(--blanco);
-    border: 1px solid var(--borde);
+    border: 1.5px solid var(--borde);
     border-radius: var(--radio-lg);
-    padding: 32px;
+    border-top: var(--borde-grueso) solid var(--naranja);
+    padding: 36px;
     margin-bottom: 20px;
   }
 
   .caso-bloque h3 {
-    font-size: 13px;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--acento);
-    margin-bottom: 16px;
+    letter-spacing: 1.5px;
+    color: var(--naranja);
+    margin-bottom: 18px;
   }
 
   .caso-texto {
-    background: var(--amarillo-claro);
-    border: 1px solid #e8d9b0;
-    border-radius: var(--radio);
-    padding: 20px;
+    background: var(--naranja-claro);
+    border-left: var(--borde-grueso) solid var(--naranja);
+    padding: 20px 22px;
+    margin-bottom: 24px;
     font-size: 14px;
-    line-height: 1.7;
+    line-height: 1.75;
     color: var(--gris-oscuro);
-    margin-bottom: 20px;
     font-style: italic;
   }
 
   .caso-texto strong {
     display: block;
-    font-family: 'Arial', sans-serif;
-    font-size: 11px;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    color: #8a7040;
+    letter-spacing: 1.5px;
+    color: var(--naranja);
     margin-bottom: 8px;
     font-style: normal;
   }
 
   .caso-pregunta {
-    font-size: 15px;
-    line-height: 1.7;
+    font-size: 16px;
+    line-height: 1.75;
     color: var(--negro);
-    margin-bottom: 16px;
+    margin-bottom: 18px;
   }
 
   textarea {
@@ -468,9 +480,9 @@
     border: 1.5px solid var(--borde);
     border-radius: var(--radio);
     padding: 16px;
-    font-size: 14px;
-    font-family: 'Georgia', serif;
-    line-height: 1.7;
+    font-family: 'Source Serif 4', serif;
+    font-size: 15px;
+    line-height: 1.75;
     color: var(--negro);
     background: var(--blanco);
     resize: vertical;
@@ -479,14 +491,15 @@
     outline: none;
   }
 
-  textarea:focus { border-color: var(--acento); }
+  textarea:focus { border-color: var(--azul); }
 
   .ia-feedback {
     background: var(--gris-fondo);
-    border: 1px solid var(--borde);
-    border-radius: var(--radio);
-    padding: 20px;
-    margin-top: 16px;
+    border: 1.5px solid var(--borde);
+    border-left: var(--borde-grueso) solid var(--azul);
+    border-radius: 0 var(--radio) var(--radio) 0;
+    padding: 22px;
+    margin-top: 18px;
     display: none;
   }
 
@@ -496,21 +509,21 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    font-size: 12px;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--gris-medio);
-    margin-bottom: 12px;
+    letter-spacing: 1.5px;
+    color: var(--azul);
+    margin-bottom: 14px;
   }
 
   .ia-dot {
     width: 8px; height: 8px;
-    border-radius: 50%;
-    background: var(--acento);
+    background: var(--azul);
   }
 
   .ia-feedback p {
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 14px;
     line-height: 1.7;
     color: var(--gris-oscuro);
@@ -519,141 +532,147 @@
 
   .ia-dimensiones {
     display: flex;
-    gap: 10px;
-    margin-top: 14px;
+    gap: 8px;
+    margin-top: 16px;
     flex-wrap: wrap;
   }
 
   .ia-dim {
-    font-size: 12px;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
     padding: 4px 12px;
-    border-radius: 20px;
+    border-radius: 0;
     background: var(--blanco);
-    border: 1px solid var(--borde);
+    border: 1.5px solid var(--borde);
     color: var(--gris-medio);
   }
 
   .ia-dim.bien { border-color: var(--verde); color: var(--verde); background: var(--verde-claro); }
-  .ia-dim.mejorar { border-color: #8a7040; color: #8a7040; background: var(--amarillo-claro); }
+  .ia-dim.mejorar { border-color: var(--naranja); color: var(--naranja); background: var(--naranja-claro); }
 
   /* ── BOTONES ── */
   .btn {
-    padding: 10px 22px;
-    border-radius: 8px;
+    padding: 10px 24px;
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 14px;
-    font-family: 'Arial', sans-serif;
+    font-weight: 700;
     cursor: pointer;
     border: none;
     transition: all 0.15s;
-    font-weight: bold;
+    letter-spacing: 0.3px;
+    border-radius: var(--radio);
   }
 
-  .btn-primario {
-    background: var(--acento);
-    color: white;
-  }
-
-  .btn-primario:hover { background: var(--acento-hover); }
+  .btn-primario { background: var(--azul); color: white; }
+  .btn-primario:hover { background: var(--azul-hover); }
   .btn-primario:disabled { background: var(--gris-claro); cursor: not-allowed; }
 
   .btn-secundario {
     background: var(--blanco);
-    color: var(--acento);
-    border: 1.5px solid var(--acento);
+    color: var(--azul);
+    border: 1.5px solid var(--azul);
   }
 
-  .btn-secundario:hover { background: var(--acento-claro); }
+  .btn-secundario:hover { background: var(--azul-claro); }
+
+  .btn-naranja { background: var(--naranja); color: white; }
+  .btn-naranja:hover { background: var(--naranja-hover); }
 
   .btn-row {
     display: flex;
     gap: 10px;
     justify-content: flex-end;
-    margin-top: 16px;
+    margin-top: 18px;
   }
 
   /* ── PROGRESO ── */
   .progreso-wrap {
-    max-width: 900px;
+    max-width: 940px;
     margin: 0 auto;
-    padding: 40px 24px;
+    padding: 40px 24px 80px;
   }
 
   .progreso-header {
     margin-bottom: 32px;
+    border-left: var(--borde-grueso) solid var(--naranja);
+    padding-left: 20px;
   }
 
   .progreso-header h1 {
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 26px;
-    font-weight: normal;
-    margin-bottom: 6px;
+    font-weight: 700;
+    margin-bottom: 4px;
+    letter-spacing: -0.3px;
   }
 
   .progreso-header p {
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 14px;
-    font-family: 'Arial', sans-serif;
     color: var(--gris-medio);
   }
 
   .vista-toggle {
     display: flex;
     gap: 0;
-    background: var(--gris-fondo);
-    border: 1px solid var(--borde);
-    border-radius: 8px;
+    background: var(--blanco);
+    border: 1.5px solid var(--borde);
+    border-radius: var(--radio);
     padding: 3px;
     width: fit-content;
     margin-bottom: 32px;
   }
 
   .vista-btn {
-    padding: 7px 18px;
-    border-radius: 6px;
+    padding: 7px 20px;
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 13px;
-    font-family: 'Arial', sans-serif;
+    font-weight: 500;
     cursor: pointer;
     border: none;
     background: none;
     color: var(--gris-medio);
     transition: all 0.15s;
+    border-radius: var(--radio);
   }
 
   .vista-btn.active {
-    background: var(--blanco);
-    color: var(--negro);
-    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-    font-weight: bold;
+    background: var(--azul);
+    color: white;
+    font-weight: 700;
   }
 
-  /* Vista estudiante */
+  /* Stats */
   .stats-row {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 16px;
-    margin-bottom: 32px;
+    margin-bottom: 28px;
   }
 
   .stat-card {
     background: var(--blanco);
-    border: 1px solid var(--borde);
+    border: 1.5px solid var(--borde);
+    border-top: var(--borde-grueso) solid var(--azul);
     border-radius: var(--radio-lg);
     padding: 20px;
     text-align: center;
   }
 
   .stat-numero {
-    font-size: 32px;
-    font-weight: bold;
-    color: var(--acento);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 34px;
+    font-weight: 700;
+    color: var(--azul);
     line-height: 1;
     margin-bottom: 6px;
   }
 
   .stat-label {
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 12px;
-    font-family: 'Arial', sans-serif;
     color: var(--gris-medio);
-    line-height: 1.3;
+    line-height: 1.35;
   }
 
   .modulos-progreso {
@@ -665,9 +684,10 @@
 
   .modulo-progreso-card {
     background: var(--blanco);
-    border: 1px solid var(--borde);
+    border: 1.5px solid var(--borde);
+    border-top: var(--borde-grueso) solid var(--azul);
     border-radius: var(--radio-lg);
-    padding: 24px;
+    padding: 26px;
   }
 
   .modulo-progreso-header {
@@ -678,21 +698,24 @@
   }
 
   .modulo-progreso-titulo {
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 16px;
+    font-weight: 700;
     color: var(--negro);
     margin-bottom: 4px;
   }
 
   .modulo-progreso-autores {
-    font-size: 12px;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
     color: var(--gris-medio);
   }
 
   .modulo-pct {
-    font-size: 22px;
-    font-weight: bold;
-    color: var(--acento);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--azul);
     white-space: nowrap;
   }
 
@@ -705,60 +728,59 @@
 
   .momento-ind {
     background: var(--gris-fondo);
+    border: 1px solid var(--borde);
     border-radius: var(--radio);
-    padding: 12px 14px;
+    padding: 14px 16px;
   }
 
   .momento-ind-titulo {
-    font-size: 11px;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
     text-transform: uppercase;
-    letter-spacing: 0.8px;
+    letter-spacing: 1px;
     color: var(--gris-medio);
     margin-bottom: 6px;
   }
 
   .momento-ind-valor {
-    font-size: 18px;
-    font-weight: bold;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
     color: var(--negro);
     margin-bottom: 2px;
   }
 
   .momento-ind-sub {
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 11px;
-    font-family: 'Arial', sans-serif;
     color: var(--gris-medio);
   }
 
-  .indicador-bar-wrap {
-    margin-top: 14px;
-  }
+  .indicador-bar-wrap { margin-top: 14px; }
 
   .indicador-bar-label {
     display: flex;
     justify-content: space-between;
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 12px;
-    font-family: 'Arial', sans-serif;
     color: var(--gris-medio);
-    margin-bottom: 4px;
+    margin-bottom: 5px;
   }
 
   .indicador-bar {
-    height: 6px;
+    height: 4px;
     background: var(--gris-fondo);
-    border-radius: 3px;
+    border-radius: 0;
     overflow: hidden;
   }
 
   .indicador-bar-fill {
     height: 100%;
-    border-radius: 3px;
-    background: var(--acento);
+    background: var(--azul);
   }
 
+  .indicador-bar-fill.naranja { background: var(--naranja); }
   .indicador-bar-fill.verde { background: var(--verde); }
-  .indicador-bar-fill.amarillo { background: #c49a2c; }
 
   /* Vista docente */
   .docente-vista { display: none; }
@@ -770,38 +792,50 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 16px;
-    margin-bottom: 32px;
+    margin-bottom: 28px;
   }
+
+  .grupo-stats .stat-card { border-top-color: var(--naranja); }
+  .grupo-stats .stat-numero { color: var(--naranja); }
 
   .tabla-grupo {
     background: var(--blanco);
-    border: 1px solid var(--borde);
+    border: 1.5px solid var(--borde);
     border-radius: var(--radio-lg);
     overflow: hidden;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
   }
 
   .tabla-grupo-header {
     padding: 16px 24px;
     border-bottom: 1px solid var(--borde);
-    font-size: 14px;
-    font-family: 'Arial', sans-serif;
-    font-weight: bold;
-    color: var(--negro);
+    background: var(--negro);
+    color: var(--blanco);
   }
 
-  table {
-    width: 100%;
-    border-collapse: collapse;
+  .tabla-grupo-header-titulo {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 4px;
   }
+
+  .tabla-grupo-header-sub {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--gris-claro);
+    line-height: 1.5;
+  }
+
+  table { width: 100%; border-collapse: collapse; }
 
   th {
     text-align: left;
     padding: 10px 20px;
-    font-size: 11px;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
     text-transform: uppercase;
-    letter-spacing: 0.8px;
+    letter-spacing: 1px;
     color: var(--gris-medio);
     background: var(--gris-fondo);
     border-bottom: 1px solid var(--borde);
@@ -809,8 +843,8 @@
 
   td {
     padding: 12px 20px;
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 13px;
-    font-family: 'Arial', sans-serif;
     color: var(--gris-oscuro);
     border-bottom: 1px solid var(--borde);
   }
@@ -821,58 +855,66 @@
   .pill {
     display: inline-block;
     padding: 3px 10px;
-    border-radius: 20px;
-    font-size: 11px;
-    font-family: 'Arial', sans-serif;
-    font-weight: bold;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    border-radius: 0;
   }
 
-  .pill-alto { background: var(--verde-claro); color: var(--verde); }
-  .pill-medio { background: var(--amarillo-claro); color: #8a7040; }
-  .pill-bajo { background: var(--rojo-claro); color: var(--rojo); }
+  .pill-alto { background: var(--verde-claro); color: var(--verde); border: 1px solid var(--verde); }
+  .pill-medio { background: var(--naranja-claro); color: var(--naranja); border: 1px solid var(--naranja); }
+  .pill-bajo { background: var(--rojo-claro); color: var(--rojo); border: 1px solid var(--rojo); }
 
   .mini-bar-wrap {
     display: flex;
     align-items: center;
     gap: 8px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 13px;
   }
 
   .mini-bar {
-    height: 6px;
+    height: 4px;
     width: 80px;
     background: var(--gris-fondo);
-    border-radius: 3px;
+    border-radius: 0;
     overflow: hidden;
     flex-shrink: 0;
   }
 
   .mini-bar-fill {
     height: 100%;
-    background: var(--acento);
-    border-radius: 3px;
+    background: var(--azul);
   }
 
   .nota-metodologica {
-    background: var(--amarillo-claro);
-    border: 1px solid #e8d9b0;
-    border-radius: var(--radio);
-    padding: 16px 20px;
+    background: var(--naranja-claro);
+    border-left: var(--borde-grueso) solid var(--naranja);
+    padding: 18px 22px;
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 13px;
-    font-family: 'Arial', sans-serif;
-    color: #6b5a2c;
-    line-height: 1.6;
-    margin-top: 8px;
+    color: var(--gris-oscuro);
+    line-height: 1.65;
   }
 
-  .nota-metodologica strong { color: #8a7040; }
+  .nota-metodologica strong {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--naranja);
+    display: block;
+    margin-bottom: 6px;
+  }
 
-  /* ── LOADING IA ── */
+  /* Loading IA */
   .loading-ia {
     display: none;
     align-items: center;
     gap: 10px;
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 13px;
-    font-family: 'Arial', sans-serif;
     color: var(--gris-medio);
     margin-top: 12px;
   }
@@ -882,8 +924,7 @@
   .loading-dots span {
     display: inline-block;
     width: 6px; height: 6px;
-    border-radius: 50%;
-    background: var(--acento);
+    background: var(--azul);
     margin: 0 2px;
     animation: bounce 1.2s infinite;
   }
@@ -892,25 +933,26 @@
   .loading-dots span:nth-child(3) { animation-delay: 0.4s; }
 
   @keyframes bounce {
-    0%, 80%, 100% { transform: scale(0.7); opacity: 0.5; }
+    0%, 80%, 100% { transform: scale(0.7); opacity: 0.4; }
     40% { transform: scale(1); opacity: 1; }
   }
 
-  /* ── NOTA MAQUETA ── */
+  /* Nota maqueta */
   .nota-maqueta {
-    background: #1a1a1a;
-    color: #b4b2a9;
+    background: var(--negro);
+    color: var(--gris-claro);
     text-align: center;
     padding: 10px;
-    font-size: 12px;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
     position: fixed;
     bottom: 0;
     left: 0; right: 0;
     z-index: 200;
+    letter-spacing: 0.5px;
   }
 
-  .nota-maqueta span { color: #ffffff; }
+  .nota-maqueta span { color: var(--azul); }
 </style>
 </head>
 <body>
@@ -927,7 +969,7 @@
   </div>
 </nav>
 
-<!-- ══ PANTALLA: INICIO ══ -->
+<!-- ══ INICIO ══ -->
 <div id="screen-inicio" class="screen active">
   <div class="inicio-wrap">
     <div class="inicio-header">
@@ -938,33 +980,33 @@
     <div class="modulos-grid">
       <div class="modulo-card disponible" onclick="irA('leccion')">
         <div class="badge-nuevo">Nuevo</div>
-        <div class="modulo-num">Módulo 1</div>
+        <div class="modulo-num">// Módulo 01</div>
         <div class="modulo-titulo">Teoría del Actor-Red</div>
-        <div class="modulo-autores">Latour, Callon, Law</div>
+        <div class="modulo-autores">Latour · Callon · Law</div>
         <div class="modulo-progreso-bar">
-          <div class="modulo-progreso-fill" style="width: 33%"></div>
+          <div class="modulo-progreso-fill" style="width:33%"></div>
         </div>
         <div class="modulo-progreso-label">1 de 3 momentos completados</div>
       </div>
 
       <div class="modulo-card bloqueado">
         <div class="badge-lock">🔒</div>
-        <div class="modulo-num">Módulo 2</div>
+        <div class="modulo-num">// Módulo 02</div>
         <div class="modulo-titulo">Política y disenso</div>
-        <div class="modulo-autores">Rancière, Mouffe</div>
+        <div class="modulo-autores">Rancière · Mouffe</div>
         <div class="modulo-progreso-bar">
-          <div class="modulo-progreso-fill" style="width: 0%"></div>
+          <div class="modulo-progreso-fill" style="width:0%"></div>
         </div>
         <div class="modulo-progreso-label">Completa el módulo 1 para desbloquear</div>
       </div>
 
       <div class="modulo-card bloqueado">
         <div class="badge-lock">🔒</div>
-        <div class="modulo-num">Módulo 3</div>
+        <div class="modulo-num">// Módulo 03</div>
         <div class="modulo-titulo">Culturas juveniles</div>
-        <div class="modulo-autores">Feixa, Reguillo</div>
+        <div class="modulo-autores">Feixa · Reguillo</div>
         <div class="modulo-progreso-bar">
-          <div class="modulo-progreso-fill" style="width: 0%"></div>
+          <div class="modulo-progreso-fill" style="width:0%"></div>
         </div>
         <div class="modulo-progreso-label">Completa el módulo 2 para desbloquear</div>
       </div>
@@ -972,7 +1014,7 @@
   </div>
 </div>
 
-<!-- ══ PANTALLA: LECCIÓN ══ -->
+<!-- ══ LECCIÓN ══ -->
 <div id="screen-leccion" class="screen">
   <div class="leccion-wrap">
     <div class="leccion-breadcrumb">
@@ -991,7 +1033,7 @@
     <div id="momento-1" style="display:none">
       <div class="exposicion-bloque">
         <h2>Teoría del Actor-Red</h2>
-        <div class="subtitulo">Bruno Latour, Michel Callon, John Law · Módulo 1</div>
+        <div class="subtitulo">Bruno Latour · Michel Callon · John Law &nbsp;|&nbsp; Módulo 01</div>
 
         <p>La Teoría del Actor-Red (TAR), desarrollada a partir de los años ochenta en el campo de los estudios sociales de la ciencia y la tecnología, propone una ruptura con la distinción moderna entre lo social y lo natural, entre lo humano y lo no humano. Para sus principales exponentes —Bruno Latour, Michel Callon y John Law—, lo social no es una sustancia o un dominio particular de la realidad, sino el nombre de un tipo de conexión entre elementos heterogéneos.</p>
 
@@ -1013,7 +1055,7 @@
     <!-- MOMENTO 2 -->
     <div id="momento-2">
       <div class="pregunta-bloque">
-        <h3>Pregunta de identificación</h3>
+        <h3>// Pregunta de identificación</h3>
         <p class="enunciado">En el estudio de Callon sobre las vieiras de Saint-Brieuc, los investigadores logran que pescadores, vieiras y colegas científicos acepten sus términos. ¿Cómo denomina la TAR a este proceso de redefinición de intereses ajenos en función del propio proyecto?</p>
 
         <div class="opciones-lista">
@@ -1046,7 +1088,7 @@
         </div>
 
         <div class="btn-row" id="btn-verificar-row">
-          <button class="btn btn-primario" id="btn-verificar" disabled onclick="verificarRespuesta()">Verificar respuesta</button>
+          <button class="btn btn-naranja" id="btn-verificar" disabled onclick="verificarRespuesta()">Verificar respuesta</button>
         </div>
         <div class="btn-row" id="btn-continuar-row" style="display:none">
           <button class="btn btn-primario" onclick="mostrarMomento(3)">Continuar al análisis de caso →</button>
@@ -1057,7 +1099,7 @@
     <!-- MOMENTO 3 -->
     <div id="momento-3" style="display:none">
       <div class="caso-bloque">
-        <h3>Análisis de caso</h3>
+        <h3>// Análisis de caso</h3>
 
         <div class="caso-texto">
           <strong>Caso</strong>
@@ -1069,31 +1111,28 @@
         <textarea id="respuesta-caso" placeholder="Escribe tu análisis aquí. Procura usar los conceptos con precisión y apoyarte en el caso concreto…" oninput="actualizarBotonEnvio()"></textarea>
 
         <div class="loading-ia" id="loading-ia">
-          <div class="loading-dots">
-            <span></span><span></span><span></span>
-          </div>
+          <div class="loading-dots"><span></span><span></span><span></span></div>
           Evaluando con IA…
         </div>
 
         <div class="ia-feedback" id="ia-feedback">
           <div class="ia-feedback-header">
             <div class="ia-dot"></div>
-            Retroalimentación generada por IA
+            Retroalimentación · IA
           </div>
           <p>Tu análisis identifica correctamente a los modelos matemáticos como actores no humanos con agencia dentro de la red, lo cual es un punto fuerte. La descripción del proceso de traducción es pertinente: muestras cómo los epidemiólogos lograron que los gobiernos adoptaran sus categorías y proyecciones como base para la toma de decisiones.</p>
           <p>Un área a profundizar: la TAR distingue entre la <em>problematización</em> (definir el problema y posicionarse como punto de paso obligado) y el <em>enrolamiento</em> (asignar roles a los actores reclutados). Tu análisis los trata como un proceso único. Sería útil que identificaras el momento en que el modelo <em>problematizó</em> la pandemia antes de que los gobiernos fueran enrolados.</p>
           <p>Sobre la desestabilización de la red: mencionas las actualizaciones de cifras, pero podrías explorar más qué ocurrió con la portavocía de los epidemiólogos cuando otros científicos cuestionaron sus supuestos. ¿Quién habló por el virus en esa controversia?</p>
-
           <div class="ia-dimensiones">
             <div class="ia-dim bien">✓ Uso de actantes no humanos</div>
             <div class="ia-dim bien">✓ Proceso de traducción</div>
-            <div class="ia-dim mejorar">Profundizar: problematización vs. enrolamiento</div>
-            <div class="ia-dim mejorar">Profundizar: desestabilización de la red</div>
+            <div class="ia-dim mejorar">↗ Problematización vs. enrolamiento</div>
+            <div class="ia-dim mejorar">↗ Desestabilización de la red</div>
           </div>
         </div>
 
         <div class="btn-row" id="btn-enviar-row">
-          <button class="btn btn-primario" id="btn-enviar" disabled onclick="enviarRespuesta()">Enviar para evaluación</button>
+          <button class="btn btn-naranja" id="btn-enviar" disabled onclick="enviarRespuesta()">Enviar para evaluación</button>
         </div>
         <div class="btn-row" id="btn-modulos-row" style="display:none">
           <button class="btn btn-secundario" onclick="irA('inicio')">← Volver a módulos</button>
@@ -1101,11 +1140,10 @@
         </div>
       </div>
     </div>
-
   </div>
 </div>
 
-<!-- ══ PANTALLA: PROGRESO ══ -->
+<!-- ══ PROGRESO ══ -->
 <div id="screen-progreso" class="screen">
   <div class="progreso-wrap">
     <div class="progreso-header">
@@ -1120,7 +1158,6 @@
 
     <!-- VISTA ESTUDIANTE -->
     <div class="estudiante-vista" id="vista-estudiante">
-
       <div class="stats-row">
         <div class="stat-card">
           <div class="stat-numero">1</div>
@@ -1132,7 +1169,7 @@
         </div>
         <div class="stat-card">
           <div class="stat-numero">1</div>
-          <div class="stat-label">Intento en ejercicio de identificación</div>
+          <div class="stat-label">Intento en identificación</div>
         </div>
         <div class="stat-card">
           <div class="stat-numero">100%</div>
@@ -1141,52 +1178,46 @@
       </div>
 
       <div class="modulos-progreso">
-
-        <!-- Módulo 1 -->
         <div class="modulo-progreso-card">
           <div class="modulo-progreso-header">
             <div>
               <div class="modulo-progreso-titulo">Teoría del Actor-Red</div>
-              <div class="modulo-progreso-autores">Latour, Callon, Law · Módulo 1</div>
+              <div class="modulo-progreso-autores">Latour · Callon · Law &nbsp;|&nbsp; Módulo 01</div>
             </div>
             <div class="modulo-pct">67%</div>
           </div>
-
           <div class="indicador-bar-wrap">
             <div class="indicador-bar-label"><span>Avance general</span><span>2 de 3 momentos</span></div>
             <div class="indicador-bar"><div class="indicador-bar-fill" style="width:67%"></div></div>
           </div>
-
           <div class="momentos-indicadores">
             <div class="momento-ind">
-              <div class="momento-ind-titulo">Exposición teórica</div>
-              <div class="momento-ind-valor" style="color: var(--verde)">✓</div>
+              <div class="momento-ind-titulo">Exposición</div>
+              <div class="momento-ind-valor" style="color:var(--verde)">✓</div>
               <div class="momento-ind-sub">Completada</div>
             </div>
             <div class="momento-ind">
               <div class="momento-ind-titulo">Identificación</div>
-              <div class="momento-ind-valor" style="color: var(--verde)">✓</div>
+              <div class="momento-ind-valor" style="color:var(--verde)">✓</div>
               <div class="momento-ind-sub">Correcto al 1er intento</div>
             </div>
             <div class="momento-ind">
               <div class="momento-ind-titulo">Análisis de caso</div>
-              <div class="momento-ind-valor" style="color: var(--gris-claro)">—</div>
+              <div class="momento-ind-valor" style="color:var(--gris-claro)">—</div>
               <div class="momento-ind-sub">Pendiente</div>
             </div>
           </div>
-
           <div class="indicador-bar-wrap" style="margin-top:16px">
             <div class="indicador-bar-label"><span>Desempeño en identificación</span><span>Alta precisión</span></div>
             <div class="indicador-bar"><div class="indicador-bar-fill verde" style="width:100%"></div></div>
           </div>
         </div>
 
-        <!-- Módulo 2 -->
-        <div class="modulo-progreso-card" style="opacity:0.5">
+        <div class="modulo-progreso-card" style="opacity:0.45">
           <div class="modulo-progreso-header">
             <div>
               <div class="modulo-progreso-titulo">Política y disenso</div>
-              <div class="modulo-progreso-autores">Rancière, Mouffe · Módulo 2</div>
+              <div class="modulo-progreso-autores">Rancière · Mouffe &nbsp;|&nbsp; Módulo 02</div>
             </div>
             <div class="modulo-pct" style="color:var(--gris-claro)">—</div>
           </div>
@@ -1196,12 +1227,11 @@
           </div>
         </div>
 
-        <!-- Módulo 3 -->
-        <div class="modulo-progreso-card" style="opacity:0.5">
+        <div class="modulo-progreso-card" style="opacity:0.45">
           <div class="modulo-progreso-header">
             <div>
               <div class="modulo-progreso-titulo">Culturas juveniles</div>
-              <div class="modulo-progreso-autores">Feixa, Reguillo · Módulo 3</div>
+              <div class="modulo-progreso-autores">Feixa · Reguillo &nbsp;|&nbsp; Módulo 03</div>
             </div>
             <div class="modulo-pct" style="color:var(--gris-claro)">—</div>
           </div>
@@ -1210,13 +1240,11 @@
             <div class="indicador-bar"><div class="indicador-bar-fill" style="width:0%"></div></div>
           </div>
         </div>
-
       </div>
     </div>
 
     <!-- VISTA DOCENTE -->
     <div class="docente-vista" id="vista-docente">
-
       <div class="grupo-stats">
         <div class="stat-card">
           <div class="stat-numero">12</div>
@@ -1228,18 +1256,18 @@
         </div>
         <div class="stat-card">
           <div class="stat-numero">78%</div>
-          <div class="stat-label">Tasa de acierto promedio en identificación</div>
+          <div class="stat-label">Acierto promedio en identificación</div>
         </div>
         <div class="stat-card">
           <div class="stat-numero">1.4</div>
-          <div class="stat-label">Intentos promedio por ejercicio de identificación</div>
+          <div class="stat-label">Intentos promedio por ejercicio</div>
         </div>
       </div>
 
       <div class="tabla-grupo">
         <div class="tabla-grupo-header">
-          Datos de uso generados automáticamente por SocioLab — Módulo 1: Teoría del Actor-Red
-          <div style="font-size:11px; font-weight:normal; color:var(--gris-medio); margin-top:4px; font-family:'Arial',sans-serif;">Tasa de consulta: 9 de 12 estudiantes iniciaron el módulo (75%). La columna "Acceso al módulo" indica si el estudiante lo consultó antes o después de la sesión del <span style="white-space:nowrap">18 sep. 2025</span>.</div>
+          <div class="tabla-grupo-header-titulo">Datos de uso generados automáticamente por SocioLab — Módulo 01: Teoría del Actor-Red</div>
+          <div class="tabla-grupo-header-sub">Tasa de consulta: 9 de 12 estudiantes iniciaron el módulo (75%). La columna "Acceso al módulo" indica si el estudiante lo consultó antes o después de la sesión del 18 sep. 2025.</div>
         </div>
         <table>
           <thead>
@@ -1257,12 +1285,7 @@
             <tr>
               <td>A. Martínez</td>
               <td><span class="pill pill-alto">Antes de sesión</span></td>
-              <td>
-                <div class="mini-bar-wrap">
-                  <div class="mini-bar"><div class="mini-bar-fill" style="width:100%"></div></div>
-                  <span>100%</span>
-                </div>
-              </td>
+              <td><div class="mini-bar-wrap"><div class="mini-bar"><div class="mini-bar-fill" style="width:100%"></div></div><span>100%</span></div></td>
               <td><span class="pill pill-alto">Correcto</span></td>
               <td>1</td>
               <td><span class="pill pill-alto">Enviado</span></td>
@@ -1271,12 +1294,7 @@
             <tr>
               <td>B. Herrera</td>
               <td><span class="pill pill-alto">Antes de sesión</span></td>
-              <td>
-                <div class="mini-bar-wrap">
-                  <div class="mini-bar"><div class="mini-bar-fill" style="width:67%"></div></div>
-                  <span>67%</span>
-                </div>
-              </td>
+              <td><div class="mini-bar-wrap"><div class="mini-bar"><div class="mini-bar-fill" style="width:67%"></div></div><span>67%</span></div></td>
               <td><span class="pill pill-alto">Correcto</span></td>
               <td>2</td>
               <td><span class="pill pill-medio">Pendiente</span></td>
@@ -1285,12 +1303,7 @@
             <tr>
               <td>C. Ramos</td>
               <td><span class="pill pill-medio">Después de sesión</span></td>
-              <td>
-                <div class="mini-bar-wrap">
-                  <div class="mini-bar"><div class="mini-bar-fill" style="width:67%"></div></div>
-                  <span>67%</span>
-                </div>
-              </td>
+              <td><div class="mini-bar-wrap"><div class="mini-bar"><div class="mini-bar-fill" style="width:67%"></div></div><span>67%</span></div></td>
               <td><span class="pill pill-medio">Correcto</span></td>
               <td>3</td>
               <td><span class="pill pill-medio">Pendiente</span></td>
@@ -1299,12 +1312,7 @@
             <tr>
               <td>D. Flores</td>
               <td><span class="pill pill-medio">Después de sesión</span></td>
-              <td>
-                <div class="mini-bar-wrap">
-                  <div class="mini-bar"><div class="mini-bar-fill" style="width:100%"></div></div>
-                  <span>100%</span>
-                </div>
-              </td>
+              <td><div class="mini-bar-wrap"><div class="mini-bar"><div class="mini-bar-fill" style="width:100%"></div></div><span>100%</span></div></td>
               <td><span class="pill pill-alto">Correcto</span></td>
               <td>1</td>
               <td><span class="pill pill-alto">Enviado</span></td>
@@ -1313,12 +1321,7 @@
             <tr>
               <td>E. López</td>
               <td><span class="pill pill-bajo">Sin acceso</span></td>
-              <td>
-                <div class="mini-bar-wrap">
-                  <div class="mini-bar"><div class="mini-bar-fill" style="width:33%"></div></div>
-                  <span>33%</span>
-                </div>
-              </td>
+              <td><div class="mini-bar-wrap"><div class="mini-bar"><div class="mini-bar-fill" style="width:33%"></div></div><span>33%</span></div></td>
               <td><span class="pill pill-bajo">Pendiente</span></td>
               <td>—</td>
               <td><span class="pill pill-bajo">No iniciado</span></td>
@@ -1327,12 +1330,7 @@
             <tr>
               <td>F. Vega</td>
               <td><span class="pill pill-alto">Antes de sesión</span></td>
-              <td>
-                <div class="mini-bar-wrap">
-                  <div class="mini-bar"><div class="mini-bar-fill" style="width:100%"></div></div>
-                  <span>100%</span>
-                </div>
-              </td>
+              <td><div class="mini-bar-wrap"><div class="mini-bar"><div class="mini-bar-fill" style="width:100%"></div></div><span>100%</span></div></td>
               <td><span class="pill pill-alto">Correcto</span></td>
               <td>1</td>
               <td><span class="pill pill-alto">Enviado</span></td>
@@ -1343,9 +1341,9 @@
       </div>
 
       <div class="nota-metodologica">
-        <strong>Nota metodológica.</strong> Los indicadores que muestra esta vista son datos de uso generados automáticamente por SocioLab; documentan exposición al contenido y desempeño en ejercicios estructurados, no apropiación conceptual verificada. La distinción entre acceso previo y posterior a la sesión permite identificar cómo el estudiantado distribuye su contacto con el contenido, pero no establece por sí sola una relación causal con el aprendizaje. El número de intentos en identificación y el nivel de desempeño en el caso abierto son indicios que orientan el juicio pedagógico del docente, no medidas definitivas. Un indicador complementario que SocioLab no puede generar de manera automática es el desempeño en los trabajos finales del estudiantado que consultó los recursos frente a quienes no lo hicieron; su análisis requiere que el docente cruce los datos de uso de la plataforma con las evaluaciones realizadas en otros espacios, con las reservas metodológicas que exige cualquier comparación de este tipo en un contexto no controlado.
+        <strong>// Nota metodológica</strong>
+        Los indicadores que muestra esta vista son datos de uso generados automáticamente por SocioLab; documentan exposición al contenido y desempeño en ejercicios estructurados, no apropiación conceptual verificada. La distinción entre acceso previo y posterior a la sesión permite identificar cómo el estudiantado distribuye su contacto con el contenido, pero no establece por sí sola una relación causal con el aprendizaje. El número de intentos en identificación y el nivel de desempeño en el caso abierto son indicios que orientan el juicio pedagógico del docente, no medidas definitivas. Un indicador complementario que SocioLab no puede generar de manera automática es el desempeño en los trabajos finales del estudiantado que consultó los recursos frente a quienes no lo hicieron; su análisis requiere que el docente cruce los datos de uso de la plataforma con las evaluaciones realizadas en otros espacios, con las reservas metodológicas que exige cualquier comparación de este tipo en un contexto no controlado.
       </div>
-
     </div>
   </div>
 </div>
@@ -1391,7 +1389,6 @@
   function verificarRespuesta() {
     if (!opcionSeleccionada) return;
     document.querySelectorAll('.opcion').forEach(o => o.style.pointerEvents = 'none');
-
     if (respuestaCorrecta) {
       opcionSeleccionada.classList.remove('seleccionada');
       opcionSeleccionada.classList.add('correcta');
@@ -1402,12 +1399,9 @@
       document.getElementById('op-b').classList.add('correcta');
       document.getElementById('retro-incorrecta').classList.add('visible');
     }
-
     document.getElementById('btn-verificar-row').style.display = 'none';
     document.getElementById('btn-continuar-row').style.display = 'flex';
-
-    const tabs = document.querySelectorAll('.momento-tab');
-    tabs[1].classList.add('completado');
+    document.querySelectorAll('.momento-tab')[1].classList.add('completado');
   }
 
   function actualizarBotonEnvio() {
@@ -1419,14 +1413,12 @@
     document.getElementById('btn-enviar').disabled = true;
     document.getElementById('btn-enviar').textContent = 'Enviando…';
     document.getElementById('loading-ia').classList.add('visible');
-
     setTimeout(() => {
       document.getElementById('loading-ia').classList.remove('visible');
       document.getElementById('ia-feedback').classList.add('visible');
       document.getElementById('btn-enviar-row').style.display = 'none';
       document.getElementById('btn-modulos-row').style.display = 'flex';
-      const tabs = document.querySelectorAll('.momento-tab');
-      tabs[2].classList.add('completado');
+      document.querySelectorAll('.momento-tab')[2].classList.add('completado');
     }, 2200);
   }
 
