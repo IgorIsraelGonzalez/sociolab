@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SocioLab — Maqueta conceptual · Universidad de Guadalajara</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --azul:#202945;
+    --azul-oscuro:#161B30;
+    --rojo:#B12028;
+    --verde:#8F993E;
+    --amarillo:#FDCF85;
+    --tinta:#26282E;
+    --tinta-suave:#5A5D66;
+    --papel:#FFFFFF;
+    --papel-suave:#F4F4F1;
+    --linea:#E3E2DC;
+    --serif:Georgia,'Times New Roman',serif;
+    --sans:'Montserrat',-apple-system,'Segoe UI',Roboto,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{animation:none!important;transition:none!important}
+  }
+  body{font-family:var(--sans);color:var(--tinta);background:var(--papel);line-height:1.6;font-size:16px}
+  a{color:inherit}
+  button{font-family:var(--sans);cursor:pointer}
+  button:focus-visible,a:focus-visible{outline:3px solid var(--amarillo);outline-offset:2px}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+  .eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:800}
+  h1,h2,h3{font-family:var(--serif);font-weight:700;line-height:1.2}
+
+  /* ---------- Barra superior ---------- */
+  .topbar{background:var(--azul);color:#fff}
+  .topbar .wrap{display:flex;align-items:center;justify-content:space-between;padding-top:14px;padding-bottom:14px;gap:12px;flex-wrap:wrap}
+  .brand{font-family:var(--serif);font-size:18px;font-weight:700}
+  .brand span{font-family:var(--sans);font-weight:400;font-size:13px;color:#C9CBDA}
+  .badge{font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--azul);background:var(--amarillo);padding:5px 12px;border-radius:999px}
+
+  /* ---------- Hero ---------- */
+  .hero{background:var(--azul);color:#fff;padding:56px 0 72px}
+  .hero .wrap{display:grid;grid-template-columns:1fr 340px;gap:56px;align-items:start}
+  .hero .eyebrow{color:var(--amarillo);margin-bottom:16px}
+  .hero h1{font-size:clamp(30px,4.5vw,46px);margin-bottom:20px}
+  .hero p.lead{font-size:17px;color:#C9CBDA;max-width:46ch;margin-bottom:28px}
+  .hero .nota-maqueta{border-left:3px solid var(--amarillo);padding:10px 16px;font-size:13px;color:#C9CBDA;max-width:46ch}
+  .demo-caption{text-align:center;margin-bottom:14px}
+  .demo-caption .eyebrow{color:var(--amarillo);margin-bottom:6px}
+  .demo-caption .titulo{font-family:var(--serif);font-size:18px;color:#fff}
+
+  /* ---------- Teléfono / demo ---------- */
+  .phone-col{position:sticky;top:24px}
+  .phone{width:300px;margin:0 auto;background:#0E1122;border-radius:34px;padding:12px;box-shadow:0 24px 48px rgba(0,0,0,.35)}
+  .screen{background:#fff;border-radius:24px;overflow:hidden;height:520px;display:flex;flex-direction:column}
+  .app-head{background:var(--azul);color:#fff;padding:14px 16px;display:flex;justify-content:space-between;align-items:center}
+  .app-head .app-name{font-family:var(--serif);font-size:15px;font-weight:700}
+  .xp{font-size:11px;font-weight:700;color:var(--azul);background:var(--amarillo);border-radius:999px;padding:3px 9px}
+  .app-body{flex:1;overflow-y:auto;padding:16px;font-size:13px}
+  .app-body h4{font-family:var(--serif);font-size:15px;color:var(--azul);margin-bottom:10px}
+  .modulo{display:flex;align-items:center;gap:10px;border:1px solid var(--linea);border-radius:12px;padding:11px 12px;margin-bottom:9px;width:100%;background:#fff;text-align:left;font-size:13px}
+  .modulo:hover:not(:disabled){border-color:var(--azul)}
+  .modulo:disabled{opacity:.45;cursor:not-allowed}
+  .modulo .punto{width:9px;height:9px;border-radius:50%;background:var(--verde);flex-shrink:0}
+  .modulo.pendiente .punto{background:var(--linea)}
+  .modulo .info b{display:block;color:var(--azul)}
+  .modulo .info small{color:var(--tinta-suave);font-size:11px}
+  .paso-label{font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:var(--verde);margin-bottom:8px}
+  .teoria{background:var(--papel-suave);border-radius:12px;padding:14px;margin-bottom:14px}
+  .opcion{display:block;width:100%;text-align:left;border:1px solid var(--linea);border-radius:10px;padding:10px 12px;margin-bottom:8px;background:#fff;font-size:12.5px}
+  .opcion:hover{border-color:var(--azul)}
+  .opcion.ok{border-color:var(--verde);background:#F4F6E9;color:#4A511F;font-weight:600}
+  .opcion.mal{border-color:var(--rojo);background:#FBEDEE;color:var(--rojo)}
+  .feedback{border-radius:10px;padding:10px 12px;font-size:12px;margin-top:6px}
+  .feedback.bien{background:#F4F6E9;color:#4A511F;border:1px solid var(--verde)}
+  .feedback.err{background:#FBEDEE;color:#7A161C;border:1px solid var(--rojo)}
+  .caso textarea{width:100%;border:1px solid var(--linea);border-radius:10px;padding:10px;font-family:var(--sans);font-size:12.5px;min-height:84px;resize:vertical}
+  .sim-tag{display:inline-block;font-size:10px;letter-spacing:.08em;text-transform:uppercase;font-weight:800;color:var(--tinta-suave);background:var(--papel-suave);border-radius:999px;padding:3px 9px;margin-bottom:6px}
+  .btn{display:inline-block;border:none;border-radius:999px;padding:10px 20px;font-weight:700;font-size:13px}
+  .btn-rojo{background:var(--rojo);color:#fff}
+  .btn-rojo:hover{background:#951A22}
+  .btn-linea{background:#fff;color:var(--azul);border:1.5px solid var(--azul)}
+  .btn-mini{font-size:11.5px;padding:7px 14px}
+  .app-foot{border-top:1px solid var(--linea);padding:10px 16px;display:flex;justify-content:space-between;align-items:center}
+  .progress-track{height:7px;background:var(--linea);border-radius:999px;overflow:hidden;flex:1;margin-right:12px}
+  .progress-fill{height:100%;background:var(--rojo);border-radius:999px;transition:width .3s ease}
+  .toggle{display:flex;border:1px solid var(--linea);border-radius:999px;overflow:hidden;margin-bottom:12px}
+  .toggle button{flex:1;border:none;background:#fff;padding:7px 0;font-size:11.5px;font-weight:700;color:var(--tinta-suave)}
+  .toggle button.activo{background:var(--azul);color:#fff}
+  .mini-tabla{width:100%;border-collapse:collapse;font-size:11px}
+  .mini-tabla th{text-align:left;color:var(--tinta-suave);font-weight:700;padding:5px 4px;border-bottom:1px solid var(--linea)}
+  .mini-tabla td{padding:5px 4px;border-bottom:1px solid var(--papel-suave)}
+  .stat-fila{display:flex;justify-content:space-between;border-bottom:1px solid var(--papel-suave);padding:7px 0;font-size:12px}
+  .stat-fila b{color:var(--azul)}
+
+  /* ---------- Secciones ---------- */
+  section{padding:64px 0}
+  section.alt{background:var(--papel-suave)}
+  .sec-head{max-width:60ch;margin-bottom:36px}
+  .sec-head .eyebrow{color:var(--rojo);margin-bottom:10px}
+  .sec-head h2{font-size:clamp(24px,3.2vw,32px);color:var(--azul);margin-bottom:14px}
+  .sec-head p{color:var(--tinta-suave)}
+  .dos-col{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .tres-col{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .card{background:#fff;border:1px solid var(--linea);border-radius:16px;padding:26px}
+  section.alt .card{background:#fff}
+  .card h3{font-size:18px;color:var(--azul);margin-bottom:10px}
+  .card p{font-size:14px;color:var(--tinta-suave)}
+  .card .marca{width:34px;height:4px;background:var(--rojo);border-radius:2px;margin-bottom:16px}
+  .card.verde .marca{background:var(--verde)}
+
+  /* ---------- Arquitectura ---------- */
+  .flujo{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:14px;align-items:stretch}
+  .flujo .card{position:relative}
+  .flujo .flecha{align-self:center;font-size:22px;color:var(--rojo);font-weight:700}
+  .estado{display:inline-block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:800;border-radius:999px;padding:4px 10px;margin-bottom:12px}
+  .estado.activo{background:#F4F6E9;color:#4A511F;border:1px solid var(--verde)}
+  .estado.proyectado{background:#FFF6E4;color:#8A5B00;border:1px solid var(--amarillo)}
+
+  /* ---------- Indicadores ---------- */
+  .aviso{margin-top:28px;background:var(--azul);color:#C9CBDA;border-radius:14px;padding:18px 22px;font-size:13.5px;display:flex;gap:14px;align-items:flex-start}
+  .aviso b{color:var(--amarillo)}
+
+  /* ---------- Ruta ---------- */
+  .ruta{list-style:none;border-left:3px solid var(--linea);margin-left:8px}
+  .ruta li{position:relative;padding:0 0 30px 28px}
+  .ruta li::before{content:"";position:absolute;left:-9px;top:5px;width:15px;height:15px;border-radius:50%;background:var(--linea);border:3px solid #fff}
+  .ruta li.actual::before{background:var(--rojo)}
+  .ruta li h3{font-size:16px;color:var(--azul);margin-bottom:4px}
+  .ruta li p{font-size:14px;color:var(--tinta-suave);max-width:62ch}
+  .ruta .etiqueta{font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:var(--rojo)}
+
+  /* ---------- Adscripción ---------- */
+  .adscripcion{background:var(--azul);color:#fff}
+  .adscripcion .eyebrow{color:var(--amarillo)}
+  .adscripcion h2{color:#fff}
+  .adscripcion p{color:#C9CBDA}
+  .adscripcion .card{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.14)}
+  .adscripcion .card h3{color:var(--amarillo)}
+  .adscripcion .card p{color:#C9CBDA}
+
+  footer{background:var(--azul-oscuro);color:#9C99BE;font-size:13px}
+  footer .wrap{padding-top:30px;padding-bottom:30px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+  footer b{font-family:var(--serif);color:#fff;font-size:15px;font-weight:700}
+
+  @media(max-width:900px){
+    .hero .wrap{grid-template-columns:1fr}
+    .phone-col{position:static;order:-1;margin-bottom:8px}
+    .dos-col,.tres-col{grid-template-columns:1fr}
+    .flujo{grid-template-columns:1fr}
+    .flujo .flecha{transform:rotate(90deg);justify-self:center}
+  }
+</style>
+</head>
+<body>
+
+<!-- Barra superior -->
+<div class="topbar">
+  <div class="wrap">
+    <div class="brand">SocioLab <span>· Universidad de Guadalajara · Ciencias sociales</span></div>
+    <div class="badge">Maqueta conceptual</div>
+  </div>
+</div>
+
+<!-- Hero -->
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Innova Forum 2026 · Eje 1 · Google for Education</div>
+      <h1>El tercer punto de contacto con la teoría social</h1>
+      <p class="lead">SocioLab es el diseño conceptual de una aplicación web que llevaría la ejercitación activa más allá del aula. Complementaría la revisión previa (NotebookLM) y la tutoría de consulta (Gem en Classroom) con práctica guiada y retroalimentación inmediata generada mediante Gemini.</p>
+      <div class="nota-maqueta">Lo que se presenta aquí es una maqueta navegable, no un producto en operación. Ilustra cómo funcionaría la plataforma una vez que contara con desarrollo técnico especializado.</div>
+    </div>
+    <div class="phone-col">
+      <div class="demo-caption">
+        <div class="eyebrow">Así funcionaría</div>
+        <div class="titulo">Recorra la maqueta</div>
+      </div>
+      <div class="phone">
+        <div class="screen">
+          <div class="app-head">
+            <div class="app-name">SocioLab</div>
+            <div class="xp" id="xp">0 pts</div>
+          </div>
+          <div class="app-body" id="app-body"></div>
+          <div class="app-foot">
+            <div class="progress-track"><div class="progress-fill" id="barra" style="width:0%"></div></div>
+            <button class="btn btn-linea btn-mini" id="btn-reiniciar" type="button">Reiniciar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- El problema -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">El problema</div>
+      <h2>Dos límites estructurales de la enseñanza de la teoría</h2>
+      <p>En materias de alta densidad conceptual, la lógica convencional de leer y discutir en clase tiende a ser necesaria pero insuficiente. La apropiación de un concepto tiene un ritmo propio, distinto al de la sesión semanal.</p>
+    </div>
+    <div class="dos-col">
+      <div class="card">
+        <div class="marca"></div>
+        <h3>Un único punto de contacto</h3>
+        <p>La asignación de lecturas para discutirlas después en el aula ofrece un solo encuentro entre el contenido y el estudiantado. Los marcos analíticos de las ciencias sociales rara vez se asimilan en una primera lectura; requieren iteración y ángulos distintos a lo largo del tiempo.</p>
+      </div>
+      <div class="card">
+        <div class="marca"></div>
+        <h3>La lógica áulica</h3>
+        <p>El aprendizaje se concentra en un espacio y un tiempo discretos, y se agota ahí. Cuando la sesión termina, también termina, de facto, la oportunidad de volver sobre el contenido en el momento en que la propia comprensión lo necesita.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- La propuesta -->
+<section class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">La propuesta</div>
+      <h2>Multiplicar los puntos de contacto</h2>
+      <p>Durante el ciclo 2025-B se piloteó esta lógica en dos posgrados mediante podcasts, diapositivas y piezas musicales generados con IA y distribuidos por Google Classroom. SocioLab proyecta el paso siguiente: un espacio de ejercitación activa donde el estudiantado pondría a prueba los marcos conceptuales, con retroalimentación inmediata.</p>
+    </div>
+    <div class="tres-col">
+      <div class="card verde">
+        <div class="marca"></div>
+        <h3>Ruta de lecciones</h3>
+        <p>Cada módulo se anclaría a los contenidos del programa de la materia, con bloques breves de teoría seguidos de ejercicios de identificación y análisis.</p>
+      </div>
+      <div class="card verde">
+        <div class="marca"></div>
+        <h3>Retroalimentación inmediata</h3>
+        <p>Los ejercicios abiertos serían evaluados mediante Gemini, con devoluciones formativas que señalarían aciertos, imprecisiones y rutas de profundización.</p>
+      </div>
+      <div class="card verde">
+        <div class="marca"></div>
+        <h3>Evidencia de progreso</h3>
+        <p>La plataforma acumularía datos de uso por estudiante y por recurso, lo cual permitiría distinguir entre la exposición al contenido y su apropiación activa.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Fundamento pedagógico -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Fundamento pedagógico</div>
+      <h2>Los pilares del diseño</h2>
+    </div>
+    <div class="tres-col">
+      <div class="card">
+        <div class="marca"></div>
+        <h3>Aula invertida</h3>
+        <p>La transmisión inicial de contenidos se desplaza fuera del espacio presencial, de modo que el tiempo compartido se reserva para la argumentación y la profundización conceptual.</p>
+      </div>
+      <div class="card">
+        <div class="marca"></div>
+        <h3>Diseño Universal para el Aprendizaje</h3>
+        <p>Ofrecer el mismo contenido en registros distintos —auditivo, visual, interactivo— amplía las posibilidades de apropiación para perfiles cognitivos diversos.</p>
+      </div>
+      <div class="card">
+        <div class="marca"></div>
+        <h3>Evaluación formativa</h3>
+        <p>La retroalimentación inmediata y de bajo riesgo convertiría el error en insumo de aprendizaje, en lugar de reservar la evaluación para el cierre del ciclo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Arquitectura -->
+<section class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Arquitectura</div>
+      <h2>Tres puntos de contacto dentro del ecosistema Google</h2>
+      <p>La propuesta opera dentro del entorno Google Workspace for Education que la UdeG ya tiene desplegado y al que puede accederse con las cuentas institucionales.</p>
+    </div>
+    <div class="flujo">
+      <div class="card">
+        <span class="estado activo">En operación</span>
+        <h3>NotebookLM</h3>
+        <p>Revisión previa. Podcasts y diapositivas de síntesis generados a partir de las fuentes originales del programa, disponibles antes y después de cada sesión.</p>
+      </div>
+      <div class="flecha" aria-hidden="true">→</div>
+      <div class="card">
+        <span class="estado activo">En operación</span>
+        <h3>Gem en Classroom</h3>
+        <p>Tutoría de consulta. Un Gem personalizado atendería dudas conceptuales puntuales dentro del entorno donde el estudiantado ya gestiona sus cursos.</p>
+      </div>
+      <div class="flecha" aria-hidden="true">→</div>
+      <div class="card">
+        <span class="estado proyectado">Proyectado</span>
+        <h3>SocioLab</h3>
+        <p>Ejercitación activa. Práctica guiada con evaluación automatizada mediante Gemini y acumulación de evidencia de progreso por estudiante.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Indicadores -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Indicadores proyectados</div>
+      <h2>Lo que la plataforma permitiría medir</h2>
+    </div>
+    <div class="tres-col">
+      <div class="card">
+        <div class="marca"></div>
+        <h3>Tasa de consulta por recurso</h3>
+        <p>Proporción de consultas respecto del total de estudiantes inscritos, distinguiendo entre revisiones previas y posteriores a la sesión presencial.</p>
+      </div>
+      <div class="card">
+        <div class="marca"></div>
+        <h3>Desempeño comparado</h3>
+        <p>Contraste entre los trabajos finales del estudiantado que interactuó con los recursos y los de quienes mantuvieron un esquema tradicional.</p>
+      </div>
+      <div class="card">
+        <div class="marca"></div>
+        <h3>Datos de uso automáticos</h3>
+        <p>Registro por estudiante y por módulo que la aplicación generaría de manera automática una vez desarrollada, como base de una evaluación de impacto.</p>
+      </div>
+    </div>
+    <div class="aviso">
+      <div><b>Nota metodológica.</b> Los indicadores señalados son metas de medición para la fase de desarrollo, no resultados obtenidos. El piloto 2025-B documentó evidencia de recepción; la evidencia de impacto en el aprendizaje corresponde a esta fase proyectada.</div>
+    </div>
+  </div>
+</section>
+
+<!-- Ruta de desarrollo -->
+<section class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Proyección</div>
+      <h2>Ruta de desarrollo</h2>
+    </div>
+    <ul class="ruta">
+      <li class="actual">
+        <span class="etiqueta">Fase actual</span>
+        <h3>Maqueta conceptual navegable</h3>
+        <p>Diseño de la experiencia, la arquitectura pedagógica y los indicadores. Es lo que se presenta en esta página.</p>
+      </li>
+      <li>
+        <h3>Desarrollo técnico</h3>
+        <p>Construcción de la aplicación con la API de Gemini como motor de retroalimentación, dentro del entorno institucional.</p>
+      </li>
+      <li>
+        <h3>Piloto controlado</h3>
+        <p>Implementación en las mismas materias de posgrado donde se realizó el piloto 2025-B, con medición formal de los indicadores proyectados.</p>
+      </li>
+      <li>
+        <h3>Escalamiento en la Red Universitaria</h3>
+        <p>Adaptación de módulos para otras materias teóricas de ciencias sociales en los centros universitarios de la UdeG.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- Adscripción -->
+<section class="adscripcion">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Adscripción</div>
+      <h2>Una práctica documentada</h2>
+      <p>SocioLab se desprende de la práctica docente "Más allá del aula: multiplicar los puntos de contacto en la enseñanza de las ciencias sociales en el posgrado", implementada durante el ciclo 2025-B.</p>
+    </div>
+    <div class="dos-col">
+      <div class="card">
+        <h3>Autor</h3>
+        <p>Dr. Igor Israel González Aguirre · Profesor investigador, CUCSH · Universidad de Guadalajara.</p>
+      </div>
+      <div class="card">
+        <h3>Piloto 2025-B</h3>
+        <p>Teoría social (Maestría en Estudios de Género) y Conceptualizando la juventud (Maestría en Estudios sobre Juventudes).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div><b>SocioLab</b> · Maqueta conceptual · Innova Forum 2026</div>
+    <div>Las interacciones de esta maqueta son simuladas con fines ilustrativos.</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var body = document.getElementById('app-body');
+  var xpEl = document.getElementById('xp');
+  var barra = document.getElementById('barra');
+  var xp = 0;
+
+  function setXP(v){ xp = v; xpEl.textContent = xp + ' pts'; }
+  function setBarra(pct){ barra.style.width = pct + '%'; }
+
+  function pantallaModulos(){
+    setBarra(0);
+    body.innerHTML =
+      '<h4>Módulos disponibles</h4>' +
+      '<button class="modulo" id="m-weber">' +
+        '<span class="punto"></span>' +
+        '<span class="info"><b>El pensamiento de Max Weber</b><small>Racionalización · 3 pasos</small></span>' +
+      '</button>' +
+      '<button class="modulo pendiente" disabled>' +
+        '<span class="punto"></span>' +
+        '<span class="info"><b>Karl Marx: argumentos y críticas</b><small>Disponible en la versión desarrollada</small></span>' +
+      '</button>' +
+      '<button class="modulo pendiente" disabled>' +
+        '<span class="punto"></span>' +
+        '<span class="info"><b>Durkheim: el hecho social</b><small>Disponible en la versión desarrollada</small></span>' +
+      '</button>' +
+      '<button class="modulo pendiente" disabled>' +
+        '<span class="punto"></span>' +
+        '<span class="info"><b>De la juventud a las juventudes</b><small>Disponible en la versión desarrollada</small></span>' +
+      '</button>';
+    document.getElementById('m-weber').addEventListener('click', pantallaTeoria);
+  }
+
+  function pantallaTeoria(){
+    setBarra(25);
+    body.innerHTML =
+      '<div class="paso-label">Paso 1 de 3 · Teoría</div>' +
+      '<h4>La jaula de hierro</h4>' +
+      '<div class="teoria">Para Weber, la racionalización moderna tiende a encerrar la vida social en estructuras burocráticas y calculadoras. La metáfora de la jaula de hierro nombra ese orden que, creado por las personas, termina por constreñirlas.</div>' +
+      '<button class="btn btn-rojo" id="btn-continuar">Continuar</button>';
+    document.getElementById('btn-continuar').addEventListener('click', pantallaQuiz);
+  }
+
+  function pantallaQuiz(){
+    setBarra(50);
+    body.innerHTML =
+      '<div class="paso-label">Paso 2 de 3 · Identificación</div>' +
+      '<h4>¿Qué describe la jaula de hierro?</h4>' +
+      '<button class="opcion" data-ok="0">La imposibilidad del cambio social en cualquier época</button>' +
+      '<button class="opcion" data-ok="1">El constreñimiento de la vida por estructuras racionalizadas</button>' +
+      '<button class="opcion" data-ok="0">El aislamiento del individuo respecto de la naturaleza</button>' +
+      '<div id="quiz-fb"></div>';
+    var opciones = body.querySelectorAll('.opcion');
+    for (var i = 0; i < opciones.length; i++){
+      opciones[i].addEventListener('click', function(){
+        var ok = this.getAttribute('data-ok') === '1';
+        var fb = document.getElementById('quiz-fb');
+        for (var j = 0; j < opciones.length; j++){ opciones[j].disabled = true; }
+        if (ok){
+          this.className = 'opcion ok';
+          setXP(xp + 10);
+          fb.innerHTML = '<div class="feedback bien">Correcto. La clave está en que el orden racionalizado es producto humano y, al mismo tiempo, límite de la acción.</div>' +
+            '<div style="margin-top:12px"><button class="btn btn-rojo" id="btn-caso">Continuar</button></div>';
+        } else {
+          this.className = 'opcion mal';
+          fb.innerHTML = '<div class="feedback err">No exactamente. Weber no niega el cambio; señala el constreñimiento que produce la racionalización. Revise el bloque de teoría e intente de nuevo.</div>' +
+            '<div style="margin-top:12px"><button class="btn btn-linea btn-mini" id="btn-reintentar">Reintentar</button></div>';
+          document.getElementById('btn-reintentar').addEventListener('click', pantallaQuiz);
+          return;
+        }
+        document.getElementById('btn-caso').addEventListener('click', pantallaCaso);
+      });
+    }
+  }
+
+  function pantallaCaso(){
+    setBarra(75);
+    body.innerHTML =
+      '<div class="paso-label">Paso 3 de 3 · Análisis de caso</div>' +
+      '<h4>Aplique el concepto</h4>' +
+      '<div class="caso">' +
+        '<p style="margin-bottom:10px;color:var(--tinta-suave)">Describa una situación de su entorno universitario que pueda leerse desde la jaula de hierro.</p>' +
+        '<textarea id="respuesta" placeholder="Escriba su análisis aquí…"></textarea>' +
+        '<div style="margin-top:10px"><button class="btn btn-rojo" id="btn-enviar">Enviar</button></div>' +
+        '<div id="caso-fb"></div>' +
+      '</div>';
+    document.getElementById('btn-enviar').addEventListener('click', function(){
+      var texto = document.getElementById('respuesta').value.trim();
+      var fb = document.getElementById('caso-fb');
+      if (!texto){
+        fb.innerHTML = '<div class="feedback err" style="margin-top:10px">Escriba su análisis antes de enviar.</div>';
+        return;
+      }
+      setXP(xp + 20);
+      fb.innerHTML =
+        '<div style="margin-top:12px"><span class="sim-tag">Retroalimentación simulada · la generaría Gemini</span>' +
+        '<div class="feedback bien">Su análisis identifica una estructura racionalizada concreta. Para profundizar, valdría la pena distinguir entre la eficiencia que esa estructura promete y los márgenes de acción que efectivamente deja a las personas. Sugerencia de lectura: el apartado sobre burocracia en Economía y sociedad.</div>' +
+        '<div style="margin-top:12px"><button class="btn btn-rojo" id="btn-progreso">Ver progreso</button></div></div>';
+      document.getElementById('btn-progreso').addEventListener('click', pantallaProgreso);
+    });
+  }
+
+  function pantallaProgreso(){
+    setBarra(100);
+    body.innerHTML =
+      '<h4>Progreso</h4>' +
+      '<div class="toggle">' +
+        '<button id="t-est" class="activo" type="button">Estudiante</button>' +
+        '<button id="t-doc" type="button">Docente</button>' +
+      '</div>' +
+      '<div id="vista"></div>';
+    var vista = document.getElementById('vista');
+    var tEst = document.getElementById('t-est');
+    var tDoc = document.getElementById('t-doc');
+
+    function vistaEstudiante(){
+      tEst.className = 'activo'; tDoc.className = '';
+      vista.innerHTML =
+        '<div class="stat-fila"><span>Módulo Weber</span><b>Completado</b></div>' +
+        '<div class="stat-fila"><span>Puntos acumulados</span><b>' + xp + ' pts</b></div>' +
+        '<div class="stat-fila"><span>Accesos previos a la sesión</span><b>2</b></div>' +
+        '<div class="stat-fila"><span>Accesos posteriores</span><b>1</b></div>' +
+        '<p style="margin-top:12px;font-size:11px;color:var(--tinta-suave)">Datos ilustrativos de la maqueta.</p>';
+    }
+    function vistaDocente(){
+      tDoc.className = 'activo'; tEst.className = '';
+      vista.innerHTML =
+        '<table class="mini-tabla">' +
+        '<tr><th>Recurso</th><th>Consulta</th><th>Previo/Post</th></tr>' +
+        '<tr><td>Weber</td><td>84%</td><td>60/40</td></tr>' +
+        '<tr><td>Marx</td><td>—</td><td>—</td></tr>' +
+        '<tr><td>Durkheim</td><td>—</td><td>—</td></tr>' +
+        '</table>' +
+        '<p style="margin-top:12px;font-size:11px;color:var(--tinta-suave)">Vista docente con datos ilustrativos. La versión desarrollada generaría estos indicadores de manera automática.</p>';
+    }
+    tEst.addEventListener('click', vistaEstudiante);
+    tDoc.addEventListener('click', vistaDocente);
+    vistaEstudiante();
+  }
+
+  document.getElementById('btn-reiniciar').addEventListener('click', function(){
+    setXP(0);
+    pantallaModulos();
+  });
+
+  pantallaModulos();
+})();
+</script>
+</body>
+</html>
