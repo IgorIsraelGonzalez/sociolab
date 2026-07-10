@@ -3,1437 +3,542 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SocioLab — Maqueta interactiva</title>
+<title>SocioLab — Maqueta conceptual · Universidad de Guadalajara</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --azul: #2196C4;
-    --azul-claro: #E8F5FB;
-    --azul-hover: #1878A0;
-    --naranja: #F47C20;
-    --naranja-claro: #FEF0E4;
-    --naranja-hover: #D4640E;
-    --negro: #2A2A28;
-    --gris-oscuro: #4A4A47;
-    --gris-medio: #7A7A76;
-    --gris-claro: #C4C4BE;
-    --gris-fondo: #EEF5F9;
-    --blanco: #F5FAFE;
-    --verde: #2E7D5A;
-    --verde-claro: #E6F4EC;
-    --rojo: #B02020;
-    --rojo-claro: #FAECEC;
-    --borde: #D8D8D2;
-    --borde-grueso: 5px;
-    --radio: 4px;
-    --radio-lg: 6px;
-    --sombra: 0 2px 16px rgba(33,150,196,0.08);
+  :root{
+    --azul:#202945;
+    --azul-oscuro:#161B30;
+    --rojo:#B12028;
+    --verde:#8F993E;
+    --amarillo:#FDCF85;
+    --tinta:#26282E;
+    --tinta-suave:#5A5D66;
+    --papel:#FFFFFF;
+    --papel-suave:#F4F4F1;
+    --linea:#E3E2DC;
+    --serif:Georgia,'Times New Roman',serif;
+    --sans:'Montserrat',-apple-system,'Segoe UI',Roboto,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{animation:none!important;transition:none!important}
+  }
+  body{font-family:var(--sans);color:var(--tinta);background:var(--papel);line-height:1.6;font-size:16px}
+  a{color:inherit}
+  button{font-family:var(--sans);cursor:pointer}
+  button:focus-visible,a:focus-visible{outline:3px solid var(--amarillo);outline-offset:2px}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+  .eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:800}
+  h1,h2,h3{font-family:var(--serif);font-weight:700;line-height:1.2}
+
+  /* ---------- Barra superior ---------- */
+  .topbar{background:var(--azul);color:#fff}
+  .topbar .wrap{display:flex;align-items:center;justify-content:space-between;padding-top:14px;padding-bottom:14px;gap:12px;flex-wrap:wrap}
+  .brand{font-family:var(--serif);font-size:18px;font-weight:700}
+  .brand span{font-family:var(--sans);font-weight:400;font-size:13px;color:#C9CBDA}
+  .badge{font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--azul);background:var(--amarillo);padding:5px 12px;border-radius:999px}
+
+  /* ---------- Hero ---------- */
+  .hero{background:var(--azul);color:#fff;padding:56px 0 72px}
+  .hero .wrap{display:grid;grid-template-columns:1fr 340px;gap:56px;align-items:start}
+  .hero .eyebrow{color:var(--amarillo);margin-bottom:16px}
+  .hero h1{font-size:clamp(30px,4.5vw,46px);margin-bottom:20px}
+  .hero p.lead{font-size:17px;color:#C9CBDA;max-width:46ch;margin-bottom:28px}
+  .hero .nota-maqueta{border-left:3px solid var(--amarillo);padding:10px 16px;font-size:13px;color:#C9CBDA;max-width:46ch}
+  .demo-caption{text-align:center;margin-bottom:14px}
+  .demo-caption .eyebrow{color:var(--amarillo);margin-bottom:6px}
+  .demo-caption .titulo{font-family:var(--serif);font-size:18px;color:#fff}
+
+  /* ---------- Teléfono / demo ---------- */
+  .phone-col{position:sticky;top:24px}
+  .phone{width:300px;margin:0 auto;background:#0E1122;border-radius:34px;padding:12px;box-shadow:0 24px 48px rgba(0,0,0,.35)}
+  .screen{background:#fff;border-radius:24px;overflow:hidden;height:520px;display:flex;flex-direction:column}
+  .app-head{background:var(--azul);color:#fff;padding:14px 16px;display:flex;justify-content:space-between;align-items:center}
+  .app-head .app-name{font-family:var(--serif);font-size:15px;font-weight:700}
+  .xp{font-size:11px;font-weight:700;color:var(--azul);background:var(--amarillo);border-radius:999px;padding:3px 9px}
+  .app-body{flex:1;overflow-y:auto;padding:16px;font-size:13px}
+  .app-body h4{font-family:var(--serif);font-size:15px;color:var(--azul);margin-bottom:10px}
+  .modulo{display:flex;align-items:center;gap:10px;border:1px solid var(--linea);border-radius:12px;padding:11px 12px;margin-bottom:9px;width:100%;background:#fff;text-align:left;font-size:13px}
+  .modulo:hover:not(:disabled){border-color:var(--azul)}
+  .modulo:disabled{opacity:.45;cursor:not-allowed}
+  .modulo .punto{width:9px;height:9px;border-radius:50%;background:var(--verde);flex-shrink:0}
+  .modulo.pendiente .punto{background:var(--linea)}
+  .modulo .info b{display:block;color:var(--azul)}
+  .modulo .info small{color:var(--tinta-suave);font-size:11px}
+  .paso-label{font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:var(--verde);margin-bottom:8px}
+  .teoria{background:var(--papel-suave);border-radius:12px;padding:14px;margin-bottom:14px}
+  .opcion{display:block;width:100%;text-align:left;border:1px solid var(--linea);border-radius:10px;padding:10px 12px;margin-bottom:8px;background:#fff;font-size:12.5px}
+  .opcion:hover{border-color:var(--azul)}
+  .opcion.ok{border-color:var(--verde);background:#F4F6E9;color:#4A511F;font-weight:600}
+  .opcion.mal{border-color:var(--rojo);background:#FBEDEE;color:var(--rojo)}
+  .feedback{border-radius:10px;padding:10px 12px;font-size:12px;margin-top:6px}
+  .feedback.bien{background:#F4F6E9;color:#4A511F;border:1px solid var(--verde)}
+  .feedback.err{background:#FBEDEE;color:#7A161C;border:1px solid var(--rojo)}
+  .caso textarea{width:100%;border:1px solid var(--linea);border-radius:10px;padding:10px;font-family:var(--sans);font-size:12.5px;min-height:84px;resize:vertical}
+  .sim-tag{display:inline-block;font-size:10px;letter-spacing:.08em;text-transform:uppercase;font-weight:800;color:var(--tinta-suave);background:var(--papel-suave);border-radius:999px;padding:3px 9px;margin-bottom:6px}
+  .btn{display:inline-block;border:none;border-radius:999px;padding:10px 20px;font-weight:700;font-size:13px}
+  .btn-rojo{background:var(--rojo);color:#fff}
+  .btn-rojo:hover{background:#951A22}
+  .btn-linea{background:#fff;color:var(--azul);border:1.5px solid var(--azul)}
+  .btn-mini{font-size:11.5px;padding:7px 14px}
+  .app-foot{border-top:1px solid var(--linea);padding:10px 16px;display:flex;justify-content:space-between;align-items:center}
+  .progress-track{height:7px;background:var(--linea);border-radius:999px;overflow:hidden;flex:1;margin-right:12px}
+  .progress-fill{height:100%;background:var(--rojo);border-radius:999px;transition:width .3s ease}
+  .toggle{display:flex;border:1px solid var(--linea);border-radius:999px;overflow:hidden;margin-bottom:12px}
+  .toggle button{flex:1;border:none;background:#fff;padding:7px 0;font-size:11.5px;font-weight:700;color:var(--tinta-suave)}
+  .toggle button.activo{background:var(--azul);color:#fff}
+  .mini-tabla{width:100%;border-collapse:collapse;font-size:11px}
+  .mini-tabla th{text-align:left;color:var(--tinta-suave);font-weight:700;padding:5px 4px;border-bottom:1px solid var(--linea)}
+  .mini-tabla td{padding:5px 4px;border-bottom:1px solid var(--papel-suave)}
+  .stat-fila{display:flex;justify-content:space-between;border-bottom:1px solid var(--papel-suave);padding:7px 0;font-size:12px}
+  .stat-fila b{color:var(--azul)}
+
+  /* ---------- Secciones ---------- */
+  section{padding:64px 0}
+  section.alt{background:var(--papel-suave)}
+  .sec-head{max-width:60ch;margin-bottom:36px}
+  .sec-head .eyebrow{color:var(--rojo);margin-bottom:10px}
+  .sec-head h2{font-size:clamp(24px,3.2vw,32px);color:var(--azul);margin-bottom:14px}
+  .sec-head p{color:var(--tinta-suave)}
+  .dos-col{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .tres-col{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .card{background:#fff;border:1px solid var(--linea);border-radius:16px;padding:26px}
+  section.alt .card{background:#fff}
+  .card h3{font-size:18px;color:var(--azul);margin-bottom:10px}
+  .card p{font-size:14px;color:var(--tinta-suave)}
+  .card .marca{width:34px;height:4px;background:var(--rojo);border-radius:2px;margin-bottom:16px}
+  .card.verde .marca{background:var(--verde)}
+
+  /* ---------- Arquitectura ---------- */
+  .flujo{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:14px;align-items:stretch}
+  .flujo .card{position:relative}
+  .flujo .flecha{align-self:center;font-size:22px;color:var(--rojo);font-weight:700}
+  .estado{display:inline-block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:800;border-radius:999px;padding:4px 10px;margin-bottom:12px}
+  .estado.activo{background:#F4F6E9;color:#4A511F;border:1px solid var(--verde)}
+  .estado.proyectado{background:#FFF6E4;color:#8A5B00;border:1px solid var(--amarillo)}
+
+  /* ---------- Indicadores ---------- */
+  .aviso{margin-top:28px;background:var(--azul);color:#C9CBDA;border-radius:14px;padding:18px 22px;font-size:13.5px;display:flex;gap:14px;align-items:flex-start}
+  .aviso b{color:var(--amarillo)}
+
+  /* ---------- Ruta ---------- */
+  .ruta{list-style:none;border-left:3px solid var(--linea);margin-left:8px}
+  .ruta li{position:relative;padding:0 0 30px 28px}
+  .ruta li::before{content:"";position:absolute;left:-9px;top:5px;width:15px;height:15px;border-radius:50%;background:var(--linea);border:3px solid #fff}
+  .ruta li.actual::before{background:var(--rojo)}
+  .ruta li h3{font-size:16px;color:var(--azul);margin-bottom:4px}
+  .ruta li p{font-size:14px;color:var(--tinta-suave);max-width:62ch}
+  .ruta .etiqueta{font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:var(--rojo)}
+
+  /* ---------- Adscripción ---------- */
+  .adscripcion{background:var(--azul);color:#fff}
+  .adscripcion .eyebrow{color:var(--amarillo)}
+  .adscripcion h2{color:#fff}
+  .adscripcion p{color:#C9CBDA}
+  .adscripcion .card{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.14)}
+  .adscripcion .card h3{color:var(--amarillo)}
+  .adscripcion .card p{color:#C9CBDA}
+
+  footer{background:var(--azul-oscuro);color:#9C99BE;font-size:13px}
+  footer .wrap{padding-top:30px;padding-bottom:30px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+  footer b{font-family:var(--serif);color:#fff;font-size:15px;font-weight:700}
+
+  @media(max-width:900px){
+    .hero .wrap{grid-template-columns:1fr}
+    .phone-col{position:static;order:-1;margin-bottom:8px}
+    .dos-col,.tres-col{grid-template-columns:1fr}
+    .flujo{grid-template-columns:1fr}
+    .flujo .flecha{transform:rotate(90deg);justify-self:center}
   }
-
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-
-  body {
-    font-family: 'Source Serif 4', Georgia, serif;
-    background: var(--gris-fondo);
-    color: var(--negro);
-    min-height: 100vh;
-  }
-
-  /* ── NAV ── */
-  nav {
-    background: var(--negro);
-    padding: 0 32px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 56px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    border-bottom: 3px solid var(--azul);
-  }
-
-  .nav-logo {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 20px;
-    font-weight: 700;
-    letter-spacing: -0.5px;
-    color: var(--blanco);
-  }
-
-  .nav-logo span { color: var(--azul); }
-
-  .nav-links {
-    display: flex;
-    gap: 2px;
-  }
-
-  .nav-link {
-    padding: 6px 16px;
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 13px;
-    font-weight: 500;
-    cursor: pointer;
-    border: none;
-    background: none;
-    color: var(--gris-claro);
-    transition: all 0.15s;
-    border-radius: 0;
-    letter-spacing: 0.3px;
-  }
-
-  .nav-link:hover { color: var(--blanco); background: rgba(255,255,255,0.08); }
-  .nav-link.active { color: var(--azul); border-bottom: 2px solid var(--azul); }
-
-  .nav-user {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 13px;
-    color: var(--gris-claro);
-  }
-
-  .avatar {
-    width: 32px; height: 32px;
-    background: var(--naranja);
-    color: white;
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 13px;
-    font-weight: 700;
-  }
-
-  /* ── PANTALLAS ── */
-  .screen { display: none; }
-  .screen.active { display: block; }
-
-  /* ── INICIO ── */
-  .inicio-wrap {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 48px 24px 80px;
-  }
-
-  .inicio-header {
-    margin-bottom: 40px;
-    border-left: var(--borde-grueso) solid var(--azul);
-    padding-left: 20px;
-  }
-
-  .inicio-header h1 {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 28px;
-    font-weight: 700;
-    color: var(--negro);
-    margin-bottom: 6px;
-    letter-spacing: -0.5px;
-  }
-
-  .inicio-header p {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 14px;
-    color: var(--gris-medio);
-    line-height: 1.6;
-  }
-
-  .modulos-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    margin-bottom: 40px;
-  }
-
-  .modulo-card {
-    background: var(--blanco);
-    border: 1.5px solid var(--borde);
-    border-radius: var(--radio-lg);
-    border-top: var(--borde-grueso) solid var(--gris-claro);
-    padding: 24px;
-    cursor: pointer;
-    transition: all 0.2s;
-    position: relative;
-  }
-
-  .modulo-card:hover { box-shadow: var(--sombra); transform: translateY(-2px); }
-  .modulo-card.disponible { border-top-color: var(--azul); }
-  .modulo-card.bloqueado { opacity: 0.5; cursor: not-allowed; }
-
-  .modulo-num {
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    color: var(--gris-claro);
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 10px;
-  }
-
-  .modulo-titulo {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 17px;
-    font-weight: 700;
-    line-height: 1.3;
-    color: var(--negro);
-    margin-bottom: 6px;
-  }
-
-  .modulo-autores {
-    font-family: 'Space Mono', monospace;
-    font-size: 11px;
-    color: var(--gris-medio);
-    margin-bottom: 20px;
-  }
-
-  .modulo-progreso-bar {
-    height: 3px;
-    background: var(--gris-fondo);
-    border-radius: 0;
-    overflow: hidden;
-    margin-bottom: 6px;
-  }
-
-  .modulo-progreso-fill {
-    height: 100%;
-    background: var(--azul);
-    transition: width 0.4s;
-  }
-
-  .modulo-progreso-label {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 11px;
-    color: var(--gris-medio);
-  }
-
-  .badge-nuevo {
-    position: absolute;
-    top: -1px; right: 16px;
-    background: var(--naranja);
-    color: white;
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    padding: 3px 8px;
-    border-radius: 0 0 4px 4px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-
-  .badge-lock {
-    position: absolute;
-    top: 16px; right: 16px;
-    color: var(--gris-claro);
-    font-size: 16px;
-  }
-
-  /* ── LECCIÓN ── */
-  .leccion-wrap {
-    max-width: 780px;
-    margin: 0 auto;
-    padding: 40px 24px 80px;
-  }
-
-  .leccion-breadcrumb {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 12px;
-    color: var(--gris-medio);
-    margin-bottom: 28px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-
-  .breadcrumb-link {
-    cursor: pointer;
-    color: var(--azul);
-  }
-
-  .breadcrumb-link:hover { text-decoration: underline; }
-
-  .momentos-nav {
-    display: flex;
-    gap: 0;
-    margin-bottom: 32px;
-    border-bottom: 2px solid var(--borde);
-  }
-
-  .momento-tab {
-    padding: 10px 22px;
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--gris-medio);
-    cursor: pointer;
-    border-bottom: 3px solid transparent;
-    margin-bottom: -2px;
-    transition: all 0.15s;
-    white-space: nowrap;
-    letter-spacing: 0.2px;
-  }
-
-  .momento-tab.active { color: var(--azul); border-bottom-color: var(--azul); }
-  .momento-tab.completado { color: var(--verde); }
-  .momento-tab.completado::before { content: '✓ '; font-size: 11px; }
-
-  /* Exposición */
-  .exposicion-bloque {
-    background: var(--blanco);
-    border: 1.5px solid var(--borde);
-    border-radius: var(--radio-lg);
-    border-top: var(--borde-grueso) solid var(--azul);
-    padding: 36px;
-    margin-bottom: 20px;
-  }
-
-  .exposicion-bloque h2 {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 24px;
-    font-weight: 700;
-    margin-bottom: 4px;
-    color: var(--negro);
-    letter-spacing: -0.3px;
-  }
-
-  .exposicion-bloque .subtitulo {
-    font-family: 'Space Mono', monospace;
-    font-size: 11px;
-    color: var(--gris-medio);
-    margin-bottom: 28px;
-    padding-bottom: 24px;
-    border-bottom: 1px solid var(--borde);
-    letter-spacing: 0.5px;
-  }
-
-  .exposicion-bloque p {
-    font-size: 16px;
-    line-height: 1.85;
-    color: var(--gris-oscuro);
-    margin-bottom: 18px;
-  }
-
-  .concepto-clave {
-    background: var(--azul-claro);
-    border-left: var(--borde-grueso) solid var(--azul);
-    padding: 18px 22px;
-    margin: 28px 0;
-    font-size: 15px;
-    line-height: 1.75;
-    color: var(--gris-oscuro);
-  }
-
-  .concepto-clave strong {
-    display: block;
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: var(--azul);
-    margin-bottom: 8px;
-  }
-
-  /* Identificación */
-  .pregunta-bloque {
-    background: var(--blanco);
-    border: 1.5px solid var(--borde);
-    border-radius: var(--radio-lg);
-    border-top: var(--borde-grueso) solid var(--naranja);
-    padding: 36px;
-    margin-bottom: 20px;
-  }
-
-  .pregunta-bloque h3 {
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: var(--naranja);
-    margin-bottom: 18px;
-  }
-
-  .pregunta-bloque p.enunciado {
-    font-size: 16px;
-    line-height: 1.75;
-    color: var(--negro);
-    margin-bottom: 28px;
-  }
-
-  .opciones-lista {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-bottom: 24px;
-  }
-
-  .opcion {
-    display: flex;
-    align-items: flex-start;
-    gap: 14px;
-    padding: 14px 18px;
-    border: 1.5px solid var(--borde);
-    border-radius: var(--radio);
-    cursor: pointer;
-    transition: all 0.15s;
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 14px;
-    color: var(--gris-oscuro);
-    line-height: 1.55;
-    background: var(--blanco);
-  }
-
-  .opcion:hover { border-color: var(--azul); background: var(--azul-claro); }
-  .opcion.seleccionada { border-color: var(--azul); background: var(--azul-claro); }
-  .opcion.correcta { border-color: var(--verde); background: var(--verde-claro); }
-  .opcion.incorrecta { border-color: var(--rojo); background: var(--rojo-claro); }
-
-  .opcion-letra {
-    min-width: 24px;
-    height: 24px;
-    background: var(--gris-fondo);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Space Mono', monospace;
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--gris-medio);
-    margin-top: 1px;
-    flex-shrink: 0;
-    border-radius: 0;
-  }
-
-  .opcion.seleccionada .opcion-letra { background: var(--azul); color: white; }
-  .opcion.correcta .opcion-letra { background: var(--verde); color: white; }
-  .opcion.incorrecta .opcion-letra { background: var(--rojo); color: white; }
-
-  .retroalimentacion {
-    padding: 16px 20px;
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 14px;
-    line-height: 1.65;
-    margin-bottom: 20px;
-    display: none;
-    border-left: var(--borde-grueso) solid transparent;
-  }
-
-  .retroalimentacion.correcta { background: var(--verde-claro); border-left-color: var(--verde); color: var(--negro); }
-  .retroalimentacion.incorrecta { background: var(--rojo-claro); border-left-color: var(--rojo); color: var(--negro); }
-  .retroalimentacion.visible { display: block; }
-
-  .retroalimentacion-titulo {
-    font-family: 'Space Mono', monospace;
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 6px;
-  }
-
-  /* Caso */
-  .caso-bloque {
-    background: var(--blanco);
-    border: 1.5px solid var(--borde);
-    border-radius: var(--radio-lg);
-    border-top: var(--borde-grueso) solid var(--naranja);
-    padding: 36px;
-    margin-bottom: 20px;
-  }
-
-  .caso-bloque h3 {
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: var(--naranja);
-    margin-bottom: 18px;
-  }
-
-  .caso-texto {
-    background: var(--naranja-claro);
-    border-left: var(--borde-grueso) solid var(--naranja);
-    padding: 20px 22px;
-    margin-bottom: 24px;
-    font-size: 14px;
-    line-height: 1.75;
-    color: var(--gris-oscuro);
-    font-style: italic;
-  }
-
-  .caso-texto strong {
-    display: block;
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: var(--naranja);
-    margin-bottom: 8px;
-    font-style: normal;
-  }
-
-  .caso-pregunta {
-    font-size: 16px;
-    line-height: 1.75;
-    color: var(--negro);
-    margin-bottom: 18px;
-  }
-
-  textarea {
-    width: 100%;
-    border: 1.5px solid var(--borde);
-    border-radius: var(--radio);
-    padding: 16px;
-    font-family: 'Source Serif 4', serif;
-    font-size: 15px;
-    line-height: 1.75;
-    color: var(--negro);
-    background: var(--blanco);
-    resize: vertical;
-    min-height: 140px;
-    transition: border-color 0.15s;
-    outline: none;
-  }
-
-  textarea:focus { border-color: var(--azul); }
-
-  .ia-feedback {
-    background: var(--gris-fondo);
-    border: 1.5px solid var(--borde);
-    border-left: var(--borde-grueso) solid var(--azul);
-    border-radius: 0 var(--radio) var(--radio) 0;
-    padding: 22px;
-    margin-top: 18px;
-    display: none;
-  }
-
-  .ia-feedback.visible { display: block; }
-
-  .ia-feedback-header {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: var(--azul);
-    margin-bottom: 14px;
-  }
-
-  .ia-dot {
-    width: 8px; height: 8px;
-    background: var(--azul);
-  }
-
-  .ia-feedback p {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 14px;
-    line-height: 1.7;
-    color: var(--gris-oscuro);
-    margin-bottom: 10px;
-  }
-
-  .ia-dimensiones {
-    display: flex;
-    gap: 8px;
-    margin-top: 16px;
-    flex-wrap: wrap;
-  }
-
-  .ia-dim {
-    font-family: 'Space Mono', monospace;
-    font-size: 11px;
-    padding: 4px 12px;
-    border-radius: 0;
-    background: var(--blanco);
-    border: 1.5px solid var(--borde);
-    color: var(--gris-medio);
-  }
-
-  .ia-dim.bien { border-color: var(--verde); color: var(--verde); background: var(--verde-claro); }
-  .ia-dim.mejorar { border-color: var(--naranja); color: var(--naranja); background: var(--naranja-claro); }
-
-  /* ── BOTONES ── */
-  .btn {
-    padding: 10px 24px;
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 14px;
-    font-weight: 700;
-    cursor: pointer;
-    border: none;
-    transition: all 0.15s;
-    letter-spacing: 0.3px;
-    border-radius: var(--radio);
-  }
-
-  .btn-primario { background: var(--azul); color: white; }
-  .btn-primario:hover { background: var(--azul-hover); }
-  .btn-primario:disabled { background: var(--gris-claro); cursor: not-allowed; }
-
-  .btn-secundario {
-    background: var(--blanco);
-    color: var(--azul);
-    border: 1.5px solid var(--azul);
-  }
-
-  .btn-secundario:hover { background: var(--azul-claro); }
-
-  .btn-naranja { background: var(--naranja); color: white; }
-  .btn-naranja:hover { background: var(--naranja-hover); }
-
-  .btn-row {
-    display: flex;
-    gap: 10px;
-    justify-content: flex-end;
-    margin-top: 18px;
-  }
-
-  /* ── PROGRESO ── */
-  .progreso-wrap {
-    max-width: 940px;
-    margin: 0 auto;
-    padding: 40px 24px 80px;
-  }
-
-  .progreso-header {
-    margin-bottom: 32px;
-    border-left: var(--borde-grueso) solid var(--naranja);
-    padding-left: 20px;
-  }
-
-  .progreso-header h1 {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 26px;
-    font-weight: 700;
-    margin-bottom: 4px;
-    letter-spacing: -0.3px;
-  }
-
-  .progreso-header p {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 14px;
-    color: var(--gris-medio);
-  }
-
-  .vista-toggle {
-    display: flex;
-    gap: 0;
-    background: var(--blanco);
-    border: 1.5px solid var(--borde);
-    border-radius: var(--radio);
-    padding: 3px;
-    width: fit-content;
-    margin-bottom: 32px;
-  }
-
-  .vista-btn {
-    padding: 7px 20px;
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 13px;
-    font-weight: 500;
-    cursor: pointer;
-    border: none;
-    background: none;
-    color: var(--gris-medio);
-    transition: all 0.15s;
-    border-radius: var(--radio);
-  }
-
-  .vista-btn.active {
-    background: var(--azul);
-    color: white;
-    font-weight: 700;
-  }
-
-  /* Stats */
-  .stats-row {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
-    margin-bottom: 28px;
-  }
-
-  .stat-card {
-    background: var(--blanco);
-    border: 1.5px solid var(--borde);
-    border-top: var(--borde-grueso) solid var(--azul);
-    border-radius: var(--radio-lg);
-    padding: 20px;
-    text-align: center;
-  }
-
-  .stat-numero {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 34px;
-    font-weight: 700;
-    color: var(--azul);
-    line-height: 1;
-    margin-bottom: 6px;
-  }
-
-  .stat-label {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 12px;
-    color: var(--gris-medio);
-    line-height: 1.35;
-  }
-
-  .modulos-progreso {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    margin-bottom: 32px;
-  }
-
-  .modulo-progreso-card {
-    background: var(--blanco);
-    border: 1.5px solid var(--borde);
-    border-top: var(--borde-grueso) solid var(--azul);
-    border-radius: var(--radio-lg);
-    padding: 26px;
-  }
-
-  .modulo-progreso-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 16px;
-  }
-
-  .modulo-progreso-titulo {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--negro);
-    margin-bottom: 4px;
-  }
-
-  .modulo-progreso-autores {
-    font-family: 'Space Mono', monospace;
-    font-size: 11px;
-    color: var(--gris-medio);
-  }
-
-  .modulo-pct {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 24px;
-    font-weight: 700;
-    color: var(--azul);
-    white-space: nowrap;
-  }
-
-  .momentos-indicadores {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-    margin-top: 16px;
-  }
-
-  .momento-ind {
-    background: var(--gris-fondo);
-    border: 1px solid var(--borde);
-    border-radius: var(--radio);
-    padding: 14px 16px;
-  }
-
-  .momento-ind-titulo {
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--gris-medio);
-    margin-bottom: 6px;
-  }
-
-  .momento-ind-valor {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--negro);
-    margin-bottom: 2px;
-  }
-
-  .momento-ind-sub {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 11px;
-    color: var(--gris-medio);
-  }
-
-  .indicador-bar-wrap { margin-top: 14px; }
-
-  .indicador-bar-label {
-    display: flex;
-    justify-content: space-between;
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 12px;
-    color: var(--gris-medio);
-    margin-bottom: 5px;
-  }
-
-  .indicador-bar {
-    height: 4px;
-    background: var(--gris-fondo);
-    border-radius: 0;
-    overflow: hidden;
-  }
-
-  .indicador-bar-fill {
-    height: 100%;
-    background: var(--azul);
-  }
-
-  .indicador-bar-fill.naranja { background: var(--naranja); }
-  .indicador-bar-fill.verde { background: var(--verde); }
-
-  /* Vista docente */
-  .docente-vista { display: none; }
-  .docente-vista.visible { display: block; }
-  .estudiante-vista { display: block; }
-  .estudiante-vista.oculta { display: none; }
-
-  .grupo-stats {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
-    margin-bottom: 28px;
-  }
-
-  .grupo-stats .stat-card { border-top-color: var(--naranja); }
-  .grupo-stats .stat-numero { color: var(--naranja); }
-
-  .tabla-grupo {
-    background: var(--blanco);
-    border: 1.5px solid var(--borde);
-    border-radius: var(--radio-lg);
-    overflow: hidden;
-    margin-bottom: 20px;
-  }
-
-  .tabla-grupo-header {
-    padding: 16px 24px;
-    border-bottom: 1px solid var(--borde);
-    background: var(--negro);
-    color: var(--blanco);
-  }
-
-  .tabla-grupo-header-titulo {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 14px;
-    font-weight: 700;
-    margin-bottom: 4px;
-  }
-
-  .tabla-grupo-header-sub {
-    font-family: 'Space Mono', monospace;
-    font-size: 11px;
-    color: var(--gris-claro);
-    line-height: 1.5;
-  }
-
-  table { width: 100%; border-collapse: collapse; }
-
-  th {
-    text-align: left;
-    padding: 10px 20px;
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--gris-medio);
-    background: var(--gris-fondo);
-    border-bottom: 1px solid var(--borde);
-  }
-
-  td {
-    padding: 12px 20px;
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 13px;
-    color: var(--gris-oscuro);
-    border-bottom: 1px solid var(--borde);
-  }
-
-  tr:last-child td { border-bottom: none; }
-  tr:hover td { background: var(--gris-fondo); }
-
-  .pill {
-    display: inline-block;
-    padding: 3px 10px;
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    border-radius: 0;
-  }
-
-  .pill-alto { background: var(--verde-claro); color: var(--verde); border: 1px solid var(--verde); }
-  .pill-medio { background: var(--naranja-claro); color: var(--naranja); border: 1px solid var(--naranja); }
-  .pill-bajo { background: var(--rojo-claro); color: var(--rojo); border: 1px solid var(--rojo); }
-
-  .mini-bar-wrap {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 13px;
-  }
-
-  .mini-bar {
-    height: 4px;
-    width: 80px;
-    background: var(--gris-fondo);
-    border-radius: 0;
-    overflow: hidden;
-    flex-shrink: 0;
-  }
-
-  .mini-bar-fill {
-    height: 100%;
-    background: var(--azul);
-  }
-
-  .nota-metodologica {
-    background: var(--naranja-claro);
-    border-left: var(--borde-grueso) solid var(--naranja);
-    padding: 18px 22px;
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 13px;
-    color: var(--gris-oscuro);
-    line-height: 1.65;
-  }
-
-  .nota-metodologica strong {
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--naranja);
-    display: block;
-    margin-bottom: 6px;
-  }
-
-  /* Loading IA */
-  .loading-ia {
-    display: none;
-    align-items: center;
-    gap: 10px;
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 13px;
-    color: var(--gris-medio);
-    margin-top: 12px;
-  }
-
-  .loading-ia.visible { display: flex; }
-
-  .loading-dots span {
-    display: inline-block;
-    width: 6px; height: 6px;
-    background: var(--azul);
-    margin: 0 2px;
-    animation: bounce 1.2s infinite;
-  }
-
-  .loading-dots span:nth-child(2) { animation-delay: 0.2s; }
-  .loading-dots span:nth-child(3) { animation-delay: 0.4s; }
-
-  @keyframes bounce {
-    0%, 80%, 100% { transform: scale(0.7); opacity: 0.4; }
-    40% { transform: scale(1); opacity: 1; }
-  }
-
-  /* Nota maqueta */
-  .nota-maqueta {
-    background: var(--negro);
-    color: var(--gris-claro);
-    text-align: center;
-    padding: 10px;
-    font-family: 'Space Mono', monospace;
-    font-size: 11px;
-    position: fixed;
-    bottom: 0;
-    left: 0; right: 0;
-    z-index: 200;
-    letter-spacing: 0.5px;
-  }
-
-  .nota-maqueta span { color: var(--azul); }
 </style>
 </head>
 <body>
 
-<nav>
-  <div class="nav-logo">Socio<span>Lab</span></div>
-  <div class="nav-links">
-    <button class="nav-link active" onclick="irA('inicio')">Módulos</button>
-    <button class="nav-link" onclick="irA('progreso')">Mi progreso</button>
-  </div>
-  <div class="nav-user">
-    <span>Estudiante ejemplo</span>
-    <div class="avatar">E</div>
-  </div>
-</nav>
-
-<!-- ══ INICIO ══ -->
-<div id="screen-inicio" class="screen active">
-  <div class="inicio-wrap">
-    <div class="inicio-header">
-      <h1>Módulos disponibles</h1>
-      <p>Selecciona un módulo para comenzar. Cada módulo contiene tres momentos: exposición teórica, pregunta de identificación y análisis de caso.</p>
-    </div>
-
-    <div class="modulos-grid">
-      <div class="modulo-card disponible" onclick="irA('leccion')">
-        <div class="badge-nuevo">Nuevo</div>
-        <div class="modulo-num">// Módulo 01</div>
-        <div class="modulo-titulo">Teoría del Actor-Red</div>
-        <div class="modulo-autores">Latour · Callon · Law</div>
-        <div class="modulo-progreso-bar">
-          <div class="modulo-progreso-fill" style="width:33%"></div>
-        </div>
-        <div class="modulo-progreso-label">1 de 3 momentos completados</div>
-      </div>
-
-      <div class="modulo-card bloqueado">
-        <div class="badge-lock">🔒</div>
-        <div class="modulo-num">// Módulo 02</div>
-        <div class="modulo-titulo">Política y disenso</div>
-        <div class="modulo-autores">Rancière · Mouffe</div>
-        <div class="modulo-progreso-bar">
-          <div class="modulo-progreso-fill" style="width:0%"></div>
-        </div>
-        <div class="modulo-progreso-label">Completa el módulo 1 para desbloquear</div>
-      </div>
-
-      <div class="modulo-card bloqueado">
-        <div class="badge-lock">🔒</div>
-        <div class="modulo-num">// Módulo 03</div>
-        <div class="modulo-titulo">Culturas juveniles</div>
-        <div class="modulo-autores">Feixa · Reguillo</div>
-        <div class="modulo-progreso-bar">
-          <div class="modulo-progreso-fill" style="width:0%"></div>
-        </div>
-        <div class="modulo-progreso-label">Completa el módulo 2 para desbloquear</div>
-      </div>
-    </div>
+<!-- Barra superior -->
+<div class="topbar">
+  <div class="wrap">
+    <div class="brand">SocioLab <span>· Universidad de Guadalajara · Ciencias sociales</span></div>
+    <div class="badge">Maqueta conceptual</div>
   </div>
 </div>
 
-<!-- ══ LECCIÓN ══ -->
-<div id="screen-leccion" class="screen">
-  <div class="leccion-wrap">
-    <div class="leccion-breadcrumb">
-      <span class="breadcrumb-link" onclick="irA('inicio')">Módulos</span>
-      <span>›</span>
-      <span>Teoría del Actor-Red</span>
+<!-- Hero -->
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Innova Forum 2026 · Eje 1 · Google for Education</div>
+      <h1>El tercer punto de contacto con la teoría social</h1>
+      <p class="lead">SocioLab es el diseño conceptual de una aplicación web que llevaría la ejercitación activa más allá del aula. Complementaría la revisión previa (NotebookLM) y la tutoría de consulta (Gem en Classroom) con práctica guiada y retroalimentación inmediata generada mediante Gemini.</p>
+      <div class="nota-maqueta">Lo que se presenta aquí es una maqueta navegable, no un producto en operación. Ilustra cómo funcionaría la plataforma una vez que contara con desarrollo técnico especializado.</div>
     </div>
-
-    <div class="momentos-nav">
-      <div class="momento-tab completado" onclick="mostrarMomento(1)">Exposición teórica</div>
-      <div class="momento-tab active" onclick="mostrarMomento(2)">Identificación</div>
-      <div class="momento-tab" onclick="mostrarMomento(3)">Análisis de caso</div>
-    </div>
-
-    <!-- MOMENTO 1 -->
-    <div id="momento-1" style="display:none">
-      <div class="exposicion-bloque">
-        <h2>Teoría del Actor-Red</h2>
-        <div class="subtitulo">Bruno Latour · Michel Callon · John Law &nbsp;|&nbsp; Módulo 01</div>
-
-        <p>La Teoría del Actor-Red (TAR), desarrollada a partir de los años ochenta en el campo de los estudios sociales de la ciencia y la tecnología, propone una ruptura con la distinción moderna entre lo social y lo natural, entre lo humano y lo no humano. Para sus principales exponentes —Bruno Latour, Michel Callon y John Law—, lo social no es una sustancia o un dominio particular de la realidad, sino el nombre de un tipo de conexión entre elementos heterogéneos.</p>
-
-        <div class="concepto-clave">
-          <strong>Concepto central</strong>
-          Un <em>actor</em> (o actante) es cualquier entidad —humana o no humana— que produce diferencia en una red. No se trata de un agente dotado de intencionalidad, sino de cualquier elemento que modifica el estado de las cosas. Una bacteria, un contrato, una vacuna o una estadística pueden ser actores en el sentido en que Latour lo entiende.
-        </div>
-
-        <p>El concepto de <em>traducción</em> ocupa un lugar central en la TAR. Traducir significa desplazar, enrollar, desviar: hacer que los intereses de otros pasen a través del propio proyecto. Callon, en su célebre estudio sobre los pescadores de vieiras en Saint-Brieuc, muestra cómo los investigadores lograron convertirse en portavoces indispensables de las vieiras, los pescadores y los científicos al mismo tiempo, redefiniendo los intereses de cada uno de estos actores en función de su propio programa de investigación.</p>
-
-        <p>La noción de <em>red</em>, por su parte, no debe confundirse con la imagen de una malla o una infraestructura técnica. En la TAR, una red es el resultado provisional y frágil de un trabajo de enrolamiento: el conjunto de asociaciones que un actor logra estabilizar para que su proyecto prospere. Cuando la red se desestabiliza, el actor pierde su centralidad.</p>
+    <div class="phone-col">
+      <div class="demo-caption">
+        <div class="eyebrow">Así funcionaría</div>
+        <div class="titulo">Recorra la maqueta</div>
       </div>
-
-      <div class="btn-row">
-        <button class="btn btn-primario" onclick="mostrarMomento(2)">Continuar al ejercicio →</button>
-      </div>
-    </div>
-
-    <!-- MOMENTO 2 -->
-    <div id="momento-2">
-      <div class="pregunta-bloque">
-        <h3>// Pregunta de identificación</h3>
-        <p class="enunciado">En el estudio de Callon sobre las vieiras de Saint-Brieuc, los investigadores logran que pescadores, vieiras y colegas científicos acepten sus términos. ¿Cómo denomina la TAR a este proceso de redefinición de intereses ajenos en función del propio proyecto?</p>
-
-        <div class="opciones-lista">
-          <div class="opcion" onclick="seleccionarOpcion(this, false)" id="op-a">
-            <div class="opcion-letra">A</div>
-            <div>Enrolamiento: proceso por el cual un actor incorpora a otros a su red mediante la aceptación de roles previamente definidos.</div>
+      <div class="phone">
+        <div class="screen">
+          <div class="app-head">
+            <div class="app-name">SocioLab</div>
+            <div class="xp" id="xp">0 pts</div>
           </div>
-          <div class="opcion" onclick="seleccionarOpcion(this, true)" id="op-b">
-            <div class="opcion-letra">B</div>
-            <div>Traducción: operación mediante la cual un actor desplaza y redefine los intereses de otros actores para hacerlos convergir con los propios.</div>
+          <div class="app-body" id="app-body"></div>
+          <div class="app-foot">
+            <div class="progress-track"><div class="progress-fill" id="barra" style="width:0%"></div></div>
+            <button class="btn btn-linea btn-mini" id="btn-reiniciar" type="button">Reiniciar</button>
           </div>
-          <div class="opcion" onclick="seleccionarOpcion(this, false)" id="op-c">
-            <div class="opcion-letra">C</div>
-            <div>Portavocía: capacidad de hablar en nombre de entidades no humanas dentro de una controversia científica.</div>
-          </div>
-          <div class="opcion" onclick="seleccionarOpcion(this, false)" id="op-d">
-            <div class="opcion-letra">D</div>
-            <div>Problematización: momento en que un actor define un problema y se posiciona como punto de paso obligado para su resolución.</div>
-          </div>
-        </div>
-
-        <div class="retroalimentacion correcta" id="retro-correcta">
-          <div class="retroalimentacion-titulo">✓ Correcto</div>
-          La <em>traducción</em> es el proceso central que describe Callon: no se trata simplemente de sumar aliados, sino de transformar sus intereses para que pasen por el proyecto del actor que lidera la red. La distinción respecto al enrolamiento y la problematización es importante: estos son momentos o fases del proceso de traducción, no sinónimos de él.
-        </div>
-
-        <div class="retroalimentacion incorrecta" id="retro-incorrecta">
-          <div class="retroalimentacion-titulo">✗ No es la opción más precisa</div>
-          La respuesta correcta es <strong>B: traducción</strong>. Aunque los otros conceptos (enrolamiento, portavocía, problematización) también forman parte del vocabulario de la TAR, cada uno nombra un aspecto distinto del proceso. La <em>traducción</em> es el término que describe específicamente la operación de redefinir los intereses ajenos para hacerlos pasar por el propio proyecto.
-        </div>
-
-        <div class="btn-row" id="btn-verificar-row">
-          <button class="btn btn-naranja" id="btn-verificar" disabled onclick="verificarRespuesta()">Verificar respuesta</button>
-        </div>
-        <div class="btn-row" id="btn-continuar-row" style="display:none">
-          <button class="btn btn-primario" onclick="mostrarMomento(3)">Continuar al análisis de caso →</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- MOMENTO 3 -->
-    <div id="momento-3" style="display:none">
-      <div class="caso-bloque">
-        <h3>// Análisis de caso</h3>
-
-        <div class="caso-texto">
-          <strong>Caso</strong>
-          En 2020, durante la pandemia de COVID-19, los epidemiólogos del Imperial College London publicaron modelos matemáticos que proyectaban millones de muertes si no se adoptaban medidas de confinamiento. Esos modelos —y sus autores— se convirtieron rápidamente en referencias obligadas para los gobiernos de varios países, que reorganizaron sus políticas sanitarias en torno a ellos. Otros científicos cuestionaron los supuestos del modelo; algunos gobiernos los ignoraron; las cifras mismas fueron actualizadas varias veces. La controversia duró meses.
-        </div>
-
-        <p class="caso-pregunta">Utilizando al menos dos conceptos de la Teoría del Actor-Red (TAR), analiza el papel que jugaron los modelos epidemiológicos en esta situación. ¿Qué actores (humanos y no humanos) participaron en la red? ¿Cómo operó el proceso de traducción? ¿Qué ocurrió cuando la red comenzó a desestabilizarse?</p>
-
-        <textarea id="respuesta-caso" placeholder="Escribe tu análisis aquí. Procura usar los conceptos con precisión y apoyarte en el caso concreto…" oninput="actualizarBotonEnvio()"></textarea>
-
-        <div class="loading-ia" id="loading-ia">
-          <div class="loading-dots"><span></span><span></span><span></span></div>
-          Evaluando con IA…
-        </div>
-
-        <div class="ia-feedback" id="ia-feedback">
-          <div class="ia-feedback-header">
-            <div class="ia-dot"></div>
-            Retroalimentación · IA
-          </div>
-          <p>Tu análisis identifica correctamente a los modelos matemáticos como actores no humanos con agencia dentro de la red, lo cual es un punto fuerte. La descripción del proceso de traducción es pertinente: muestras cómo los epidemiólogos lograron que los gobiernos adoptaran sus categorías y proyecciones como base para la toma de decisiones.</p>
-          <p>Un área a profundizar: la TAR distingue entre la <em>problematización</em> (definir el problema y posicionarse como punto de paso obligado) y el <em>enrolamiento</em> (asignar roles a los actores reclutados). Tu análisis los trata como un proceso único. Sería útil que identificaras el momento en que el modelo <em>problematizó</em> la pandemia antes de que los gobiernos fueran enrolados.</p>
-          <p>Sobre la desestabilización de la red: mencionas las actualizaciones de cifras, pero podrías explorar más qué ocurrió con la portavocía de los epidemiólogos cuando otros científicos cuestionaron sus supuestos. ¿Quién habló por el virus en esa controversia?</p>
-          <div class="ia-dimensiones">
-            <div class="ia-dim bien">✓ Uso de actantes no humanos</div>
-            <div class="ia-dim bien">✓ Proceso de traducción</div>
-            <div class="ia-dim mejorar">↗ Problematización vs. enrolamiento</div>
-            <div class="ia-dim mejorar">↗ Desestabilización de la red</div>
-          </div>
-        </div>
-
-        <div class="btn-row" id="btn-enviar-row">
-          <button class="btn btn-naranja" id="btn-enviar" disabled onclick="enviarRespuesta()">Enviar para evaluación</button>
-        </div>
-        <div class="btn-row" id="btn-modulos-row" style="display:none">
-          <button class="btn btn-secundario" onclick="irA('inicio')">← Volver a módulos</button>
-          <button class="btn btn-primario" onclick="irA('progreso')">Ver mi progreso →</button>
         </div>
       </div>
     </div>
   </div>
-</div>
+</header>
 
-<!-- ══ PROGRESO ══ -->
-<div id="screen-progreso" class="screen">
-  <div class="progreso-wrap">
-    <div class="progreso-header">
-      <h1>Progreso</h1>
-      <p>Seguimiento de avance, desempeño por momento e indicadores acumulados.</p>
+<!-- El problema -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">El problema</div>
+      <h2>Dos límites estructurales de la enseñanza de la teoría</h2>
+      <p>En materias de alta densidad conceptual, la lógica convencional de leer y discutir en clase tiende a ser necesaria pero insuficiente. La apropiación de un concepto tiene un ritmo propio, distinto al de la sesión semanal.</p>
     </div>
-
-    <div class="vista-toggle">
-      <button class="vista-btn active" onclick="cambiarVista('estudiante')">Mi progreso</button>
-      <button class="vista-btn" onclick="cambiarVista('docente')">Vista del docente</button>
-    </div>
-
-    <!-- VISTA ESTUDIANTE -->
-    <div class="estudiante-vista" id="vista-estudiante">
-      <div class="stats-row">
-        <div class="stat-card">
-          <div class="stat-numero">1</div>
-          <div class="stat-label">Módulo en curso</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-numero">2</div>
-          <div class="stat-label">Momentos completados</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-numero">1</div>
-          <div class="stat-label">Intento en identificación</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-numero">100%</div>
-          <div class="stat-label">Acierto en identificación</div>
-        </div>
+    <div class="dos-col">
+      <div class="card">
+        <div class="marca"></div>
+        <h3>Un único punto de contacto</h3>
+        <p>La asignación de lecturas para discutirlas después en el aula ofrece un solo encuentro entre el contenido y el estudiantado. Los marcos analíticos de las ciencias sociales rara vez se asimilan en una primera lectura; requieren iteración y ángulos distintos a lo largo del tiempo.</p>
       </div>
-
-      <div class="modulos-progreso">
-        <div class="modulo-progreso-card">
-          <div class="modulo-progreso-header">
-            <div>
-              <div class="modulo-progreso-titulo">Teoría del Actor-Red</div>
-              <div class="modulo-progreso-autores">Latour · Callon · Law &nbsp;|&nbsp; Módulo 01</div>
-            </div>
-            <div class="modulo-pct">67%</div>
-          </div>
-          <div class="indicador-bar-wrap">
-            <div class="indicador-bar-label"><span>Avance general</span><span>2 de 3 momentos</span></div>
-            <div class="indicador-bar"><div class="indicador-bar-fill" style="width:67%"></div></div>
-          </div>
-          <div class="momentos-indicadores">
-            <div class="momento-ind">
-              <div class="momento-ind-titulo">Exposición</div>
-              <div class="momento-ind-valor" style="color:var(--verde)">✓</div>
-              <div class="momento-ind-sub">Completada</div>
-            </div>
-            <div class="momento-ind">
-              <div class="momento-ind-titulo">Identificación</div>
-              <div class="momento-ind-valor" style="color:var(--verde)">✓</div>
-              <div class="momento-ind-sub">Correcto al 1er intento</div>
-            </div>
-            <div class="momento-ind">
-              <div class="momento-ind-titulo">Análisis de caso</div>
-              <div class="momento-ind-valor" style="color:var(--gris-claro)">—</div>
-              <div class="momento-ind-sub">Pendiente</div>
-            </div>
-          </div>
-          <div class="indicador-bar-wrap" style="margin-top:16px">
-            <div class="indicador-bar-label"><span>Desempeño en identificación</span><span>Alta precisión</span></div>
-            <div class="indicador-bar"><div class="indicador-bar-fill verde" style="width:100%"></div></div>
-          </div>
-        </div>
-
-        <div class="modulo-progreso-card" style="opacity:0.45">
-          <div class="modulo-progreso-header">
-            <div>
-              <div class="modulo-progreso-titulo">Política y disenso</div>
-              <div class="modulo-progreso-autores">Rancière · Mouffe &nbsp;|&nbsp; Módulo 02</div>
-            </div>
-            <div class="modulo-pct" style="color:var(--gris-claro)">—</div>
-          </div>
-          <div class="indicador-bar-wrap">
-            <div class="indicador-bar-label"><span>Avance general</span><span>No iniciado</span></div>
-            <div class="indicador-bar"><div class="indicador-bar-fill" style="width:0%"></div></div>
-          </div>
-        </div>
-
-        <div class="modulo-progreso-card" style="opacity:0.45">
-          <div class="modulo-progreso-header">
-            <div>
-              <div class="modulo-progreso-titulo">Culturas juveniles</div>
-              <div class="modulo-progreso-autores">Feixa · Reguillo &nbsp;|&nbsp; Módulo 03</div>
-            </div>
-            <div class="modulo-pct" style="color:var(--gris-claro)">—</div>
-          </div>
-          <div class="indicador-bar-wrap">
-            <div class="indicador-bar-label"><span>Avance general</span><span>No iniciado</span></div>
-            <div class="indicador-bar"><div class="indicador-bar-fill" style="width:0%"></div></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- VISTA DOCENTE -->
-    <div class="docente-vista" id="vista-docente">
-      <div class="grupo-stats">
-        <div class="stat-card">
-          <div class="stat-numero">12</div>
-          <div class="stat-label">Estudiantes en el curso</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-numero">9</div>
-          <div class="stat-label">Con al menos un módulo iniciado</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-numero">78%</div>
-          <div class="stat-label">Acierto promedio en identificación</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-numero">1.4</div>
-          <div class="stat-label">Intentos promedio por ejercicio</div>
-        </div>
-      </div>
-
-      <div class="tabla-grupo">
-        <div class="tabla-grupo-header">
-          <div class="tabla-grupo-header-titulo">Datos de uso generados automáticamente por SocioLab — Módulo 01: Teoría del Actor-Red</div>
-          <div class="tabla-grupo-header-sub">Tasa de consulta: 9 de 12 estudiantes iniciaron el módulo (75%). La columna "Acceso al módulo" indica si el estudiante lo consultó antes o después de la sesión del 18 sep. 2025.</div>
-        </div>
-        <table>
-          <thead>
-            <tr>
-              <th>Estudiante</th>
-              <th>Acceso al módulo</th>
-              <th>Avance</th>
-              <th>Identificación</th>
-              <th>Intentos</th>
-              <th>Caso abierto</th>
-              <th>Desempeño IA</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>A. Martínez</td>
-              <td><span class="pill pill-alto">Antes de sesión</span></td>
-              <td><div class="mini-bar-wrap"><div class="mini-bar"><div class="mini-bar-fill" style="width:100%"></div></div><span>100%</span></div></td>
-              <td><span class="pill pill-alto">Correcto</span></td>
-              <td>1</td>
-              <td><span class="pill pill-alto">Enviado</span></td>
-              <td><span class="pill pill-alto">Alto</span></td>
-            </tr>
-            <tr>
-              <td>B. Herrera</td>
-              <td><span class="pill pill-alto">Antes de sesión</span></td>
-              <td><div class="mini-bar-wrap"><div class="mini-bar"><div class="mini-bar-fill" style="width:67%"></div></div><span>67%</span></div></td>
-              <td><span class="pill pill-alto">Correcto</span></td>
-              <td>2</td>
-              <td><span class="pill pill-medio">Pendiente</span></td>
-              <td>—</td>
-            </tr>
-            <tr>
-              <td>C. Ramos</td>
-              <td><span class="pill pill-medio">Después de sesión</span></td>
-              <td><div class="mini-bar-wrap"><div class="mini-bar"><div class="mini-bar-fill" style="width:67%"></div></div><span>67%</span></div></td>
-              <td><span class="pill pill-medio">Correcto</span></td>
-              <td>3</td>
-              <td><span class="pill pill-medio">Pendiente</span></td>
-              <td>—</td>
-            </tr>
-            <tr>
-              <td>D. Flores</td>
-              <td><span class="pill pill-medio">Después de sesión</span></td>
-              <td><div class="mini-bar-wrap"><div class="mini-bar"><div class="mini-bar-fill" style="width:100%"></div></div><span>100%</span></div></td>
-              <td><span class="pill pill-alto">Correcto</span></td>
-              <td>1</td>
-              <td><span class="pill pill-alto">Enviado</span></td>
-              <td><span class="pill pill-medio">Medio</span></td>
-            </tr>
-            <tr>
-              <td>E. López</td>
-              <td><span class="pill pill-bajo">Sin acceso</span></td>
-              <td><div class="mini-bar-wrap"><div class="mini-bar"><div class="mini-bar-fill" style="width:33%"></div></div><span>33%</span></div></td>
-              <td><span class="pill pill-bajo">Pendiente</span></td>
-              <td>—</td>
-              <td><span class="pill pill-bajo">No iniciado</span></td>
-              <td>—</td>
-            </tr>
-            <tr>
-              <td>F. Vega</td>
-              <td><span class="pill pill-alto">Antes de sesión</span></td>
-              <td><div class="mini-bar-wrap"><div class="mini-bar"><div class="mini-bar-fill" style="width:100%"></div></div><span>100%</span></div></td>
-              <td><span class="pill pill-alto">Correcto</span></td>
-              <td>1</td>
-              <td><span class="pill pill-alto">Enviado</span></td>
-              <td><span class="pill pill-alto">Alto</span></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="nota-metodologica">
-        <strong>// Nota metodológica</strong>
-        Los indicadores que muestra esta vista son datos de uso generados automáticamente por SocioLab; documentan exposición al contenido y desempeño en ejercicios estructurados, no apropiación conceptual verificada. La distinción entre acceso previo y posterior a la sesión permite identificar cómo el estudiantado distribuye su contacto con el contenido, pero no establece por sí sola una relación causal con el aprendizaje. El número de intentos en identificación y el nivel de desempeño en el caso abierto son indicios que orientan el juicio pedagógico del docente, no medidas definitivas. Un indicador complementario que SocioLab no puede generar de manera automática es el desempeño en los trabajos finales del estudiantado que consultó los recursos frente a quienes no lo hicieron; su análisis requiere que el docente cruce los datos de uso de la plataforma con las evaluaciones realizadas en otros espacios, con las reservas metodológicas que exige cualquier comparación de este tipo en un contexto no controlado.
+      <div class="card">
+        <div class="marca"></div>
+        <h3>La lógica áulica</h3>
+        <p>El aprendizaje se concentra en un espacio y un tiempo discretos, y se agota ahí. Cuando la sesión termina, también termina, de facto, la oportunidad de volver sobre el contenido en el momento en que la propia comprensión lo necesita.</p>
       </div>
     </div>
   </div>
-</div>
+</section>
 
-<div class="nota-maqueta">
-  <span>Maqueta de navegación</span> · SocioLab es un diseño conceptual. Esta interfaz es ilustrativa; no integra evaluación real por inteligencia artificial.
-</div>
+<!-- La propuesta -->
+<section class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">La propuesta</div>
+      <h2>Multiplicar los puntos de contacto</h2>
+      <p>Durante el ciclo 2025-B se piloteó esta lógica en dos posgrados mediante podcasts, diapositivas y piezas musicales generados con IA y distribuidos por Google Classroom. SocioLab proyecta el paso siguiente: un espacio de ejercitación activa donde el estudiantado pondría a prueba los marcos conceptuales, con retroalimentación inmediata.</p>
+    </div>
+    <div class="tres-col">
+      <div class="card verde">
+        <div class="marca"></div>
+        <h3>Ruta de lecciones</h3>
+        <p>Cada módulo se anclaría a los contenidos del programa de la materia, con bloques breves de teoría seguidos de ejercicios de identificación y análisis.</p>
+      </div>
+      <div class="card verde">
+        <div class="marca"></div>
+        <h3>Retroalimentación inmediata</h3>
+        <p>Los ejercicios abiertos serían evaluados mediante Gemini, con devoluciones formativas que señalarían aciertos, imprecisiones y rutas de profundización.</p>
+      </div>
+      <div class="card verde">
+        <div class="marca"></div>
+        <h3>Evidencia de progreso</h3>
+        <p>La plataforma acumularía datos de uso por estudiante y por recurso, lo cual permitiría distinguir entre la exposición al contenido y su apropiación activa.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Fundamento pedagógico -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Fundamento pedagógico</div>
+      <h2>Los pilares del diseño</h2>
+    </div>
+    <div class="tres-col">
+      <div class="card">
+        <div class="marca"></div>
+        <h3>Aula invertida</h3>
+        <p>La transmisión inicial de contenidos se desplaza fuera del espacio presencial, de modo que el tiempo compartido se reserva para la argumentación y la profundización conceptual.</p>
+      </div>
+      <div class="card">
+        <div class="marca"></div>
+        <h3>Diseño Universal para el Aprendizaje</h3>
+        <p>Ofrecer el mismo contenido en registros distintos —auditivo, visual, interactivo— amplía las posibilidades de apropiación para perfiles cognitivos diversos.</p>
+      </div>
+      <div class="card">
+        <div class="marca"></div>
+        <h3>Evaluación formativa</h3>
+        <p>La retroalimentación inmediata y de bajo riesgo convertiría el error en insumo de aprendizaje, en lugar de reservar la evaluación para el cierre del ciclo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Arquitectura -->
+<section class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Arquitectura</div>
+      <h2>Tres puntos de contacto dentro del ecosistema Google</h2>
+      <p>La propuesta opera dentro del entorno Google Workspace for Education que la UdeG ya tiene desplegado y al que puede accederse con las cuentas institucionales.</p>
+    </div>
+    <div class="flujo">
+      <div class="card">
+        <span class="estado activo">En operación</span>
+        <h3>NotebookLM</h3>
+        <p>Revisión previa. Podcasts y diapositivas de síntesis generados a partir de las fuentes originales del programa, disponibles antes y después de cada sesión.</p>
+      </div>
+      <div class="flecha" aria-hidden="true">→</div>
+      <div class="card">
+        <span class="estado activo">En operación</span>
+        <h3>Gem en Classroom</h3>
+        <p>Tutoría de consulta. Un Gem personalizado atendería dudas conceptuales puntuales dentro del entorno donde el estudiantado ya gestiona sus cursos.</p>
+      </div>
+      <div class="flecha" aria-hidden="true">→</div>
+      <div class="card">
+        <span class="estado proyectado">Proyectado</span>
+        <h3>SocioLab</h3>
+        <p>Ejercitación activa. Práctica guiada con evaluación automatizada mediante Gemini y acumulación de evidencia de progreso por estudiante.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Indicadores -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Indicadores proyectados</div>
+      <h2>Lo que la plataforma permitiría medir</h2>
+    </div>
+    <div class="tres-col">
+      <div class="card">
+        <div class="marca"></div>
+        <h3>Tasa de consulta por recurso</h3>
+        <p>Proporción de consultas respecto del total de estudiantes inscritos, distinguiendo entre revisiones previas y posteriores a la sesión presencial.</p>
+      </div>
+      <div class="card">
+        <div class="marca"></div>
+        <h3>Desempeño comparado</h3>
+        <p>Contraste entre los trabajos finales del estudiantado que interactuó con los recursos y los de quienes mantuvieron un esquema tradicional.</p>
+      </div>
+      <div class="card">
+        <div class="marca"></div>
+        <h3>Datos de uso automáticos</h3>
+        <p>Registro por estudiante y por módulo que la aplicación generaría de manera automática una vez desarrollada, como base de una evaluación de impacto.</p>
+      </div>
+    </div>
+    <div class="aviso">
+      <div><b>Nota metodológica.</b> Los indicadores señalados son metas de medición para la fase de desarrollo, no resultados obtenidos. El piloto 2025-B documentó evidencia de recepción; la evidencia de impacto en el aprendizaje corresponde a esta fase proyectada.</div>
+    </div>
+  </div>
+</section>
+
+<!-- Ruta de desarrollo -->
+<section class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Proyección</div>
+      <h2>Ruta de desarrollo</h2>
+    </div>
+    <ul class="ruta">
+      <li class="actual">
+        <span class="etiqueta">Fase actual</span>
+        <h3>Maqueta conceptual navegable</h3>
+        <p>Diseño de la experiencia, la arquitectura pedagógica y los indicadores. Es lo que se presenta en esta página.</p>
+      </li>
+      <li>
+        <h3>Desarrollo técnico</h3>
+        <p>Construcción de la aplicación con la API de Gemini como motor de retroalimentación, dentro del entorno institucional.</p>
+      </li>
+      <li>
+        <h3>Piloto controlado</h3>
+        <p>Implementación en las mismas materias de posgrado donde se realizó el piloto 2025-B, con medición formal de los indicadores proyectados.</p>
+      </li>
+      <li>
+        <h3>Escalamiento en la Red Universitaria</h3>
+        <p>Adaptación de módulos para otras materias teóricas de ciencias sociales en los centros universitarios de la UdeG.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- Adscripción -->
+<section class="adscripcion">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Adscripción</div>
+      <h2>Una práctica documentada</h2>
+      <p>SocioLab se desprende de la práctica docente "Más allá del aula: multiplicar los puntos de contacto en la enseñanza de las ciencias sociales en el posgrado", implementada durante el ciclo 2025-B.</p>
+    </div>
+    <div class="dos-col">
+      <div class="card">
+        <h3>Autor</h3>
+        <p>Dr. Igor Israel González Aguirre · Profesor investigador, CUCSH · Universidad de Guadalajara.</p>
+      </div>
+      <div class="card">
+        <h3>Piloto 2025-B</h3>
+        <p>Teoría social (Maestría en Estudios de Género) y Conceptualizando la juventud (Maestría en Estudios sobre Juventudes).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div><b>SocioLab</b> · Maqueta conceptual · Innova Forum 2026</div>
+    <div>Las interacciones de esta maqueta son simuladas con fines ilustrativos.</div>
+  </div>
+</footer>
 
 <script>
-  let opcionSeleccionada = null;
-  let respuestaCorrecta = false;
+(function(){
+  var body = document.getElementById('app-body');
+  var xpEl = document.getElementById('xp');
+  var barra = document.getElementById('barra');
+  var xp = 0;
 
-  function irA(pantalla) {
-    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-    document.getElementById('screen-' + pantalla).classList.add('active');
-    if (pantalla === 'inicio') document.querySelectorAll('.nav-link')[0].classList.add('active');
-    if (pantalla === 'progreso') document.querySelectorAll('.nav-link')[1].classList.add('active');
-    window.scrollTo(0, 0);
+  function setXP(v){ xp = v; xpEl.textContent = xp + ' pts'; }
+  function setBarra(pct){ barra.style.width = pct + '%'; }
+
+  function pantallaModulos(){
+    setBarra(0);
+    body.innerHTML =
+      '<h4>Módulos disponibles</h4>' +
+      '<button class="modulo" id="m-weber">' +
+        '<span class="punto"></span>' +
+        '<span class="info"><b>El pensamiento de Max Weber</b><small>Racionalización · 3 pasos</small></span>' +
+      '</button>' +
+      '<button class="modulo pendiente" disabled>' +
+        '<span class="punto"></span>' +
+        '<span class="info"><b>Karl Marx: argumentos y críticas</b><small>Disponible en la versión desarrollada</small></span>' +
+      '</button>' +
+      '<button class="modulo pendiente" disabled>' +
+        '<span class="punto"></span>' +
+        '<span class="info"><b>Durkheim: el hecho social</b><small>Disponible en la versión desarrollada</small></span>' +
+      '</button>' +
+      '<button class="modulo pendiente" disabled>' +
+        '<span class="punto"></span>' +
+        '<span class="info"><b>De la juventud a las juventudes</b><small>Disponible en la versión desarrollada</small></span>' +
+      '</button>';
+    document.getElementById('m-weber').addEventListener('click', pantallaTeoria);
   }
 
-  function mostrarMomento(n) {
-    for (let i = 1; i <= 3; i++) {
-      const el = document.getElementById('momento-' + i);
-      if (el) el.style.display = (i === n) ? 'block' : 'none';
+  function pantallaTeoria(){
+    setBarra(25);
+    body.innerHTML =
+      '<div class="paso-label">Paso 1 de 3 · Teoría</div>' +
+      '<h4>La jaula de hierro</h4>' +
+      '<div class="teoria">Para Weber, la racionalización moderna tiende a encerrar la vida social en estructuras burocráticas y calculadoras. La metáfora de la jaula de hierro nombra ese orden que, creado por las personas, termina por constreñirlas.</div>' +
+      '<button class="btn btn-rojo" id="btn-continuar">Continuar</button>';
+    document.getElementById('btn-continuar').addEventListener('click', pantallaQuiz);
+  }
+
+  function pantallaQuiz(){
+    setBarra(50);
+    body.innerHTML =
+      '<div class="paso-label">Paso 2 de 3 · Identificación</div>' +
+      '<h4>¿Qué describe la jaula de hierro?</h4>' +
+      '<button class="opcion" data-ok="0">La imposibilidad del cambio social en cualquier época</button>' +
+      '<button class="opcion" data-ok="1">El constreñimiento de la vida por estructuras racionalizadas</button>' +
+      '<button class="opcion" data-ok="0">El aislamiento del individuo respecto de la naturaleza</button>' +
+      '<div id="quiz-fb"></div>';
+    var opciones = body.querySelectorAll('.opcion');
+    for (var i = 0; i < opciones.length; i++){
+      opciones[i].addEventListener('click', function(){
+        var ok = this.getAttribute('data-ok') === '1';
+        var fb = document.getElementById('quiz-fb');
+        for (var j = 0; j < opciones.length; j++){ opciones[j].disabled = true; }
+        if (ok){
+          this.className = 'opcion ok';
+          setXP(xp + 10);
+          fb.innerHTML = '<div class="feedback bien">Correcto. La clave está en que el orden racionalizado es producto humano y, al mismo tiempo, límite de la acción.</div>' +
+            '<div style="margin-top:12px"><button class="btn btn-rojo" id="btn-caso">Continuar</button></div>';
+        } else {
+          this.className = 'opcion mal';
+          fb.innerHTML = '<div class="feedback err">No exactamente. Weber no niega el cambio; señala el constreñimiento que produce la racionalización. Revise el bloque de teoría e intente de nuevo.</div>' +
+            '<div style="margin-top:12px"><button class="btn btn-linea btn-mini" id="btn-reintentar">Reintentar</button></div>';
+          document.getElementById('btn-reintentar').addEventListener('click', pantallaQuiz);
+          return;
+        }
+        document.getElementById('btn-caso').addEventListener('click', pantallaCaso);
+      });
     }
-    document.querySelectorAll('.momento-tab').forEach((tab, idx) => {
-      tab.classList.remove('active');
-      if (idx + 1 === n) tab.classList.add('active');
+  }
+
+  function pantallaCaso(){
+    setBarra(75);
+    body.innerHTML =
+      '<div class="paso-label">Paso 3 de 3 · Análisis de caso</div>' +
+      '<h4>Aplique el concepto</h4>' +
+      '<div class="caso">' +
+        '<p style="margin-bottom:10px;color:var(--tinta-suave)">Describa una situación de su entorno universitario que pueda leerse desde la jaula de hierro.</p>' +
+        '<textarea id="respuesta" placeholder="Escriba su análisis aquí…"></textarea>' +
+        '<div style="margin-top:10px"><button class="btn btn-rojo" id="btn-enviar">Enviar</button></div>' +
+        '<div id="caso-fb"></div>' +
+      '</div>';
+    document.getElementById('btn-enviar').addEventListener('click', function(){
+      var texto = document.getElementById('respuesta').value.trim();
+      var fb = document.getElementById('caso-fb');
+      if (!texto){
+        fb.innerHTML = '<div class="feedback err" style="margin-top:10px">Escriba su análisis antes de enviar.</div>';
+        return;
+      }
+      setXP(xp + 20);
+      fb.innerHTML =
+        '<div style="margin-top:12px"><span class="sim-tag">Retroalimentación simulada · la generaría Gemini</span>' +
+        '<div class="feedback bien">Su análisis identifica una estructura racionalizada concreta. Para profundizar, valdría la pena distinguir entre la eficiencia que esa estructura promete y los márgenes de acción que efectivamente deja a las personas. Sugerencia de lectura: el apartado sobre burocracia en Economía y sociedad.</div>' +
+        '<div style="margin-top:12px"><button class="btn btn-rojo" id="btn-progreso">Ver progreso</button></div></div>';
+      document.getElementById('btn-progreso').addEventListener('click', pantallaProgreso);
     });
-    window.scrollTo(0, 0);
   }
 
-  function seleccionarOpcion(el, esCorrecta) {
-    if (document.getElementById('retro-correcta').classList.contains('visible')) return;
-    document.querySelectorAll('.opcion').forEach(o => o.classList.remove('seleccionada'));
-    el.classList.add('seleccionada');
-    opcionSeleccionada = el;
-    respuestaCorrecta = esCorrecta;
-    document.getElementById('btn-verificar').disabled = false;
-  }
+  function pantallaProgreso(){
+    setBarra(100);
+    body.innerHTML =
+      '<h4>Progreso</h4>' +
+      '<div class="toggle">' +
+        '<button id="t-est" class="activo" type="button">Estudiante</button>' +
+        '<button id="t-doc" type="button">Docente</button>' +
+      '</div>' +
+      '<div id="vista"></div>';
+    var vista = document.getElementById('vista');
+    var tEst = document.getElementById('t-est');
+    var tDoc = document.getElementById('t-doc');
 
-  function verificarRespuesta() {
-    if (!opcionSeleccionada) return;
-    document.querySelectorAll('.opcion').forEach(o => o.style.pointerEvents = 'none');
-    if (respuestaCorrecta) {
-      opcionSeleccionada.classList.remove('seleccionada');
-      opcionSeleccionada.classList.add('correcta');
-      document.getElementById('retro-correcta').classList.add('visible');
-    } else {
-      opcionSeleccionada.classList.remove('seleccionada');
-      opcionSeleccionada.classList.add('incorrecta');
-      document.getElementById('op-b').classList.add('correcta');
-      document.getElementById('retro-incorrecta').classList.add('visible');
+    function vistaEstudiante(){
+      tEst.className = 'activo'; tDoc.className = '';
+      vista.innerHTML =
+        '<div class="stat-fila"><span>Módulo Weber</span><b>Completado</b></div>' +
+        '<div class="stat-fila"><span>Puntos acumulados</span><b>' + xp + ' pts</b></div>' +
+        '<div class="stat-fila"><span>Accesos previos a la sesión</span><b>2</b></div>' +
+        '<div class="stat-fila"><span>Accesos posteriores</span><b>1</b></div>' +
+        '<p style="margin-top:12px;font-size:11px;color:var(--tinta-suave)">Datos ilustrativos de la maqueta.</p>';
     }
-    document.getElementById('btn-verificar-row').style.display = 'none';
-    document.getElementById('btn-continuar-row').style.display = 'flex';
-    document.querySelectorAll('.momento-tab')[1].classList.add('completado');
-  }
-
-  function actualizarBotonEnvio() {
-    const texto = document.getElementById('respuesta-caso').value.trim();
-    document.getElementById('btn-enviar').disabled = texto.length < 40;
-  }
-
-  function enviarRespuesta() {
-    document.getElementById('btn-enviar').disabled = true;
-    document.getElementById('btn-enviar').textContent = 'Enviando…';
-    document.getElementById('loading-ia').classList.add('visible');
-    setTimeout(() => {
-      document.getElementById('loading-ia').classList.remove('visible');
-      document.getElementById('ia-feedback').classList.add('visible');
-      document.getElementById('btn-enviar-row').style.display = 'none';
-      document.getElementById('btn-modulos-row').style.display = 'flex';
-      document.querySelectorAll('.momento-tab')[2].classList.add('completado');
-    }, 2200);
-  }
-
-  function cambiarVista(vista) {
-    document.querySelectorAll('.vista-btn').forEach(b => b.classList.remove('active'));
-    if (vista === 'estudiante') {
-      document.querySelectorAll('.vista-btn')[0].classList.add('active');
-      document.getElementById('vista-estudiante').classList.remove('oculta');
-      document.getElementById('vista-docente').classList.remove('visible');
-    } else {
-      document.querySelectorAll('.vista-btn')[1].classList.add('active');
-      document.getElementById('vista-estudiante').classList.add('oculta');
-      document.getElementById('vista-docente').classList.add('visible');
+    function vistaDocente(){
+      tDoc.className = 'activo'; tEst.className = '';
+      vista.innerHTML =
+        '<table class="mini-tabla">' +
+        '<tr><th>Recurso</th><th>Consulta</th><th>Previo/Post</th></tr>' +
+        '<tr><td>Weber</td><td>84%</td><td>60/40</td></tr>' +
+        '<tr><td>Marx</td><td>—</td><td>—</td></tr>' +
+        '<tr><td>Durkheim</td><td>—</td><td>—</td></tr>' +
+        '</table>' +
+        '<p style="margin-top:12px;font-size:11px;color:var(--tinta-suave)">Vista docente con datos ilustrativos. La versión desarrollada generaría estos indicadores de manera automática.</p>';
     }
+    tEst.addEventListener('click', vistaEstudiante);
+    tDoc.addEventListener('click', vistaDocente);
+    vistaEstudiante();
   }
+
+  document.getElementById('btn-reiniciar').addEventListener('click', function(){
+    setXP(0);
+    pantallaModulos();
+  });
+
+  pantallaModulos();
+})();
 </script>
 </body>
 </html>
