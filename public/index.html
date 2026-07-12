@@ -78,7 +78,7 @@
   .feedback{border-radius:10px;padding:10px 12px;font-size:12px;margin-top:6px}
   .feedback.bien{background:#F4F6E9;color:#4A511F;border:1px solid var(--verde)}
   .feedback.err{background:#FBEDEE;color:#7A161C;border:1px solid var(--rojo)}
-  .caso textarea{width:100%;border:1px solid var(--linea);border-radius:10px;padding:10px;font-family:var(--sans);font-size:12.5px;min-height:84px;resize:vertical}
+  .caso textarea{width:100%;border:1px solid var(--linea);border-radius:10px;padding:10px;font-family:var(--sans);font-size:12.5px;min-height:140px;resize:vertical}
   .sim-tag{display:inline-block;font-size:10px;letter-spacing:.08em;text-transform:uppercase;font-weight:800;color:var(--tinta-suave);background:var(--papel-suave);border-radius:999px;padding:3px 9px;margin-bottom:6px}
   .btn{display:inline-block;border:none;border-radius:999px;padding:10px 20px;font-weight:700;font-size:13px}
   .btn-rojo{background:var(--rojo);color:#fff}
@@ -398,31 +398,42 @@
   var xpEl = document.getElementById('xp');
   var barra = document.getElementById('barra');
   var xp = 0;
+  var modulosDesbloqueados = ['weber'];
 
   function setXP(v){ xp = v; xpEl.textContent = xp + ' pts'; }
   function setBarra(pct){ barra.style.width = pct + '%'; }
 
   function pantallaModulos(){
     setBarra(0);
-    body.innerHTML =
-      '<h4>Módulos disponibles</h4>' +
-      '<button class="modulo" id="m-weber">' +
+    var modulos = [
+      { id: 'weber', titulo: 'El pensamiento de Max Weber', desc: 'Racionalización · 3 pasos', orden: 1 },
+      { id: 'marx', titulo: 'Karl Marx: argumentos y críticas', desc: 'Teoría crítica · 3 pasos', orden: 2 },
+      { id: 'durkheim', titulo: 'Durkheim: el hecho social', desc: 'Hechos sociales · 3 pasos', orden: 3 },
+      { id: 'juventud', titulo: 'De la juventud a las juventudes', desc: 'Conceptualización · 3 pasos', orden: 4 }
+    ];
+    
+    var html = '<h4>Módulos disponibles</h4>';
+    for (var i = 0; i < modulos.length; i++){
+      var mod = modulos[i];
+      var desbloqueado = modulosDesbloqueados.indexOf(mod.id) !== -1;
+      var claseEstado = desbloqueado ? '' : 'pendiente';
+      var attrDisabled = desbloqueado ? '' : 'disabled';
+      var subtexto = desbloqueado ? mod.desc : 'Completa el módulo anterior para desbloquear';
+      html += '<button class="modulo ' + claseEstado + '" id="m-' + mod.id + '" ' + attrDisabled + '>' +
         '<span class="punto"></span>' +
-        '<span class="info"><b>El pensamiento de Max Weber</b><small>Racionalización · 3 pasos</small></span>' +
-      '</button>' +
-      '<button class="modulo pendiente" disabled>' +
-        '<span class="punto"></span>' +
-        '<span class="info"><b>Karl Marx: argumentos y críticas</b><small>Disponible en la versión desarrollada</small></span>' +
-      '</button>' +
-      '<button class="modulo pendiente" disabled>' +
-        '<span class="punto"></span>' +
-        '<span class="info"><b>Durkheim: el hecho social</b><small>Disponible en la versión desarrollada</small></span>' +
-      '</button>' +
-      '<button class="modulo pendiente" disabled>' +
-        '<span class="punto"></span>' +
-        '<span class="info"><b>De la juventud a las juventudes</b><small>Disponible en la versión desarrollada</small></span>' +
+        '<span class="info"><b>' + mod.titulo + '</b><small>' + subtexto + '</small></span>' +
       '</button>';
-    document.getElementById('m-weber').addEventListener('click', pantallaTeoria);
+    }
+    body.innerHTML = html;
+    
+    if (modulosDesbloqueados.indexOf('weber') !== -1){
+      document.getElementById('m-weber').addEventListener('click', pantallaTeoria);
+    }
+    if (modulosDesbloqueados.indexOf('marx') !== -1){
+      document.getElementById('m-marx').addEventListener('click', function(){
+        alert('Módulo Marx: próximamente en la versión desarrollada');
+      });
+    }
   }
 
   function pantallaTeoria(){
@@ -496,6 +507,9 @@
 
   function pantallaProgreso(){
     setBarra(100);
+    if (modulosDesbloqueados.indexOf('marx') === -1){
+      modulosDesbloqueados.push('marx');
+    }
     body.innerHTML =
       '<h4>Progreso</h4>' +
       '<div class="toggle">' +
@@ -514,7 +528,9 @@
         '<div class="stat-fila"><span>Puntos acumulados</span><b>' + xp + ' pts</b></div>' +
         '<div class="stat-fila"><span>Accesos previos a la sesión</span><b>2</b></div>' +
         '<div class="stat-fila"><span>Accesos posteriores</span><b>1</b></div>' +
-        '<p style="margin-top:12px;font-size:11px;color:var(--tinta-suave)">Datos ilustrativos de la maqueta.</p>';
+        '<p style="margin-top:12px;font-size:11px;color:var(--tinta-suave)">Datos ilustrativos de la maqueta.</p>' +
+        '<div style="margin-top:16px"><button class="btn btn-rojo" id="btn-modulos">Volver a módulos</button></div>';
+      document.getElementById('btn-modulos').addEventListener('click', pantallaModulos);
     }
     function vistaDocente(){
       tDoc.className = 'activo'; tEst.className = '';
